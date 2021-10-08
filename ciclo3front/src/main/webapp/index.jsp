@@ -19,8 +19,9 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand navbar-mr-auto" href="#"><img
-					src="img/logo.png" height="30" width="41"></a>
+				<a class="navbar-brand" href="#"><img src="img/logo.png"
+					height="30" width="41"></a>
+
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#Navbar"
 					aria-controls="navbarNav" aria-expanded="false"
@@ -28,11 +29,12 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="Navbar">
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
 							href="<%=request.getContextPath()%>/UsuarioServlet/new"><i
 								class='fas fa-user'></i> Usuarios</a></li>
-						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ClienteServlet/newClient"><i
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ClienteServlet/newClient"><i
 								class='fas fa-users'></i> Clientes</a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i
 								class='fas fa-people-carry'></i> Proveedores</a></li>
@@ -43,12 +45,17 @@
 						<li class="nav-item"><a class="nav-link" href="#"><i
 								class='fas fa-clipboard-list'></i> Reportes</a></li>
 					</ul>
+					<form class="d-flex">
+						<span class="navbar-text"> <a href="<%=request.getContextPath()%>/LoginServlet/login"> <i
+								class='fas fa-sign-in-alt'></i> Login
+						</a>
+						</span>
+					</form>
 				</div>
 			</div>
 		</nav>
 	</header>
 
-	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

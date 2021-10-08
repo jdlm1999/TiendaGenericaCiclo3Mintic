@@ -48,10 +48,15 @@ public class LoginJSON {
 		for (int i = 0; i < inp.length; i++) {
 			json += (char) inp[i];
 		}
-
-		TOKEN_USER = json;
-		
 		int respuesta = http.getResponseCode();
+		if(json.equals("No existe el usuario")) {
+			respuesta = 404;
+		}else if(json.equals("Credenciales Incorrectas")) {
+			respuesta = 401;
+		}
+		else {
+			TOKEN_USER = json;
+		}		
 		http.disconnect();
 		return respuesta;
 	}

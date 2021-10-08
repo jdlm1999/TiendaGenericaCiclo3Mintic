@@ -25,9 +25,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link active"
-						href=""><i class='fas fa-user'></i>
-							Usuarios</a></li>
+					<li class="nav-item"><a class="nav-link active" href=""><i
+							class='fas fa-user'></i> Usuarios</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-users'></i> Clientes</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
@@ -51,7 +50,14 @@
 				<div class="card-body">
 					<div class="row row-content">
 						<div class="col-12 col-md-9">
-							<form action="init" method="post">
+
+
+							<div role="alert" id="alert">
+								<h4 class="alert-heading" id="msg"></h4>
+							</div>
+
+
+							<form action="init" method="post" id="loginForm">
 								<div class="form-group row">
 									<label for="usuario" class="col-md-2 col-form-label">Usuario:
 									</label>
@@ -70,8 +76,9 @@
 								</div>
 								<div class="form-group row">
 									<div class="offset-md-2 col-md-10">
-										<button type="submit" class="btn btn-success" value="iniciarSesion"
-											name="iniciarSesion">Iniciar Sesion</button>
+										<button type="submit" class="btn btn-success"
+											value="iniciarSesion" name="iniciarSesion">Iniciar
+											Sesion</button>
 									</div>
 								</div>
 							</form>
@@ -86,5 +93,52 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(function() {
+			$("#alert").hide();
+			$("#loginForm").on('submit', function(event) {
+				event.preventDefault();
+				var f = $('#loginForm').serialize();
+				console.log(f);
+
+				$.ajax({
+					url : "init",
+					data : f,
+					type : 'POST',
+					success : function(data, textStatus, jqXHR) {
+						console.log(data);
+						if (data.trim() == 'success') {
+							$("#alert").show();
+							$("#msg").html("Usuario Registrado");
+							$("#alert").addClass('alert alert-success align-items-center');
+						}
+						else if(data.trim() == 'No Exist'){
+							$("#alert").show();
+							$("#msg").html("Usuario No encontrado");
+							$("#alert").addClass('alert alert-danger align-items-center');
+						}
+						else if(data.trim() == 'Incorrect'){
+							$("#alert").show();
+							$("#msg").html("Credenciales Incorrectas!!");
+							$("#alert").addClass('alert alert-danger align-items-center');
+						}
+					},
+					error : function(jqXHR, testStatus, errorThrown) {
+						console.log(data);
+						console.log("Error");
+					}
+				})
+				
+				setTimeout(() => {
+					$("#alert").hide('fade');
+					$("#alert").removeClass();
+				}, 2000);
+			})
+		})
+	</script>
 </body>
 </html>

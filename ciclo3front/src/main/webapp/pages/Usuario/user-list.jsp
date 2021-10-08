@@ -72,7 +72,6 @@
 									<td><%=usuario.getNombre_usuario()%></td>
 									<td><%=usuario.getEmail_usuario()%></td>
 									<td><%=usuario.getUsuario()%></td>
-									<td><%=usuario.getPassword()%></td>
 									<td><button type="button"
 											class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal"
 											data-bs-target="#actualizarModal"

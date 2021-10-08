@@ -39,6 +39,7 @@ public class UsuarioAPI {
 	@GetMapping("/listar")
 	public List<Usuario> listar(@RequestHeader(value = "Authorization") String token) {
 		if (!validarToken(token)) {
+			System.out.println("");
 			return null;
 		}
 		return usuarioController.obtenerTodos();

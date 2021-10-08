@@ -1,6 +1,7 @@
 package co.edu.unbosque.ciclo3.Login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,9 +36,10 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getPathInfo();
+		System.out.println(action);
 		try {
 			switch (action) {
-			case "/loginUser":
+			case "/login":
 				showNewForm(request, response);
 				break;
 			case "/init":
@@ -74,13 +76,16 @@ public class LoginServlet extends HttpServlet {
 		
 		int rta = 0;
 		try {
+			PrintWriter writter = response.getWriter();
 			rta = LoginJSON.postJSON(nuevo);
-			response.sendRedirect("/ciclo3front");
-//			PrintWriter writter = response.getWriter();
-//			if (rta == 200)
-//				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
-//			else
-//				writter.println(" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
+//			response.sendRedirect("/ciclo3front");
+			System.out.println(rta);
+			if (rta == 200)
+				writter.println("success");
+			else if (rta == 404)
+				writter.println("No Exist");
+			else if (rta == 401)
+				writter.println("Incorrect");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
