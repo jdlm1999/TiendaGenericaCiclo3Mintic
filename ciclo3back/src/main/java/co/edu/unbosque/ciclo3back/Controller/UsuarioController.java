@@ -3,12 +3,16 @@ package co.edu.unbosque.ciclo3back.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import co.edu.unbosque.ciclo3back.dao.UsuarioDAO;
 import co.edu.unbosque.ciclo3back.model.Usuario;
+import co.edu.unbosque.ciclo3back.utils.JWTUtil;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
-@Service
+@Controller
 public class UsuarioController {
 
 	@Autowired
@@ -16,6 +20,9 @@ public class UsuarioController {
 
 	public boolean guardarUsuario(Usuario usuario) {
 		try {
+			Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+			String hash = argon2.hash(1, 1024, 1, usuario.getPassword());
+			usuario.setPassword(hash);
 			usuarioDao.save(usuario);
 			return true;
 		} catch (Exception e) {
@@ -57,5 +64,4 @@ public class UsuarioController {
 			return false;
 		}
 	}
-
 }

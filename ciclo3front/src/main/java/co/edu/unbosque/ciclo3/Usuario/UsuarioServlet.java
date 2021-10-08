@@ -78,11 +78,12 @@ public class UsuarioServlet extends HttpServlet {
 				System.out.println("Error: La lista se encuentra vacia");
 			}
 			request.setAttribute("lista", lista);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/user-list.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Error al listar los usuarios.");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,7 +92,7 @@ public class UsuarioServlet extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/user-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-form.jsp");
 		dispatcher.forward(request, response);
 	}
 //

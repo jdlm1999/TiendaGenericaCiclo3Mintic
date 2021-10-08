@@ -28,9 +28,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link active"
-						href="./pages/Usuario/usuarioCrear.jsp"><i class='fas fa-user'></i>
-							Usuarios</a></li>
+					<li class="nav-item"><a class="nav-link active" href=""><i
+							class='fas fa-user'></i> Usuarios</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-users'></i> Clientes</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
@@ -52,7 +51,7 @@
 				<div class="col-12 col-md-9">
 					<h2>Usuarios Registrados</h2>
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table-striped">
 							<thead>
 								<tr>
 									<th>Cedula</th>
@@ -146,8 +145,9 @@
 							<label for="cedula" class="col-md-2 col-form-label">Cedula:
 							</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="inputCedulaUsuarioActualizar"
-									name="cedula" placeholder="Cedula">
+								<input type="text" class="form-control"
+									id="inputCedulaUsuarioActualizar" name="cedula"
+									placeholder="Cedula">
 							</div>
 						</div>
 						<div class="form-row">
@@ -162,7 +162,7 @@
 		</div>
 	</div>
 
-		<div id="eliminarModal" class="modal">
+	<div id="eliminarModal" class="modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -209,8 +209,6 @@
 			modalCedula.value = cedula;
 		}
 	</script>
-
 </body>
-
 
 </html>

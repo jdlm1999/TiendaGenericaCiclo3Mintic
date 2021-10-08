@@ -76,7 +76,7 @@ public class ClienteServlet extends HttpServlet {
 				System.out.println("Error: La lista se encuentra vacia");
 			}
 			request.setAttribute("lista", lista);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/client-list.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Cliente/client-list.jsp");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -89,7 +89,7 @@ public class ClienteServlet extends HttpServlet {
 	
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/client-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Cliente/client-form.jsp");
 		dispatcher.forward(request, response);
 	}
 	

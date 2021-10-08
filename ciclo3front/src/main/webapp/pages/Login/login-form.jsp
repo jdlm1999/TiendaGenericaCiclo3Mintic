@@ -26,7 +26,7 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link active"
-						href="./pages/Usuario/usuarioCrear.jsp"><i class='fas fa-user'></i>
+						href=""><i class='fas fa-user'></i>
 							Usuarios</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-users'></i> Clientes</a></li>
@@ -47,11 +47,11 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="card">
-				<h3 class="card-header bg-dark text-white">Agregar un Usuario</h3>
+				<h3 class="card-header bg-dark text-white">Iniciar Sesion</h3>
 				<div class="card-body">
 					<div class="row row-content">
 						<div class="col-12 col-md-9">
-							<form action="insert" method="post">
+							<form action="init" method="post">
 								<div class="form-group row">
 									<label for="usuario" class="col-md-2 col-form-label">Usuario:
 									</label>
@@ -69,33 +69,9 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="nombre" class="col-md-2 col-form-label">Nombre
-										del Usuario: </label>
-									<div class="col-md-10">
-										<input type="text" class="form-control" id="nombre"
-											name="nombre" placeholder="Nombre">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="email" class="col-md-2 col-form-label">Email:
-									</label>
-									<div class="col-md-10">
-										<input type="email" class="form-control" id="email"
-											name="email" placeholder="Email">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="cedula" class="col-md-2 col-form-label">Cedula:
-									</label>
-									<div class="col-md-10">
-										<input type="text" class="form-control" id="cedula"
-											name="cedula" placeholder="Cedula">
-									</div>
-								</div>
-								<div class="form-group row">
 									<div class="offset-md-2 col-md-10">
-										<button type="submit" class="btn btn-success" value="Agregar"
-											name="Agregar">Agregar Usuario</button>
+										<button type="submit" class="btn btn-success" value="iniciarSesion"
+											name="iniciarSesion">Iniciar Sesion</button>
 									</div>
 								</div>
 							</form>

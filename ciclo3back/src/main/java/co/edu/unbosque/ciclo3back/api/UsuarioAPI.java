@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unbosque.ciclo3back.Controller.UsuarioController;
 import co.edu.unbosque.ciclo3back.model.Usuario;
+import co.edu.unbosque.ciclo3back.utils.JWTUtil;
 
 @RestController
 @RequestMapping("usuarios")
@@ -21,18 +23,24 @@ public class UsuarioAPI {
 	@Autowired
 	private UsuarioController usuarioController;
 	
+	@Autowired
+    private JWTUtil jwtUtil;
+
 	@PostMapping("/crear")
 	public boolean guardar(@RequestBody Usuario usuarios) {
 		return usuarioController.guardarUsuario(usuarios);
 	}
-	
+
 	@GetMapping("/obtener/{id}")
-	public Usuario obtener(@PathVariable("id") Long id) {
+	public Usuario obtener(@RequestHeader(value = "Authorization") String token, @PathVariable("id") Long id) {
 		return usuarioController.obtenerByCedula(id);
 	}
 
 	@GetMapping("/listar")
-	public List<Usuario> listar() {
+	public List<Usuario> listar(@RequestHeader(value = "Authorization") String token) {
+		if (!validarToken(token)) {
+			return null;
+		}
 		return usuarioController.obtenerTodos();
 	}
 
@@ -40,9 +48,17 @@ public class UsuarioAPI {
 	public boolean actualizar(@RequestBody Usuario usuarios) {
 		return usuarioController.actualizarUsuario(usuarios);
 	}
-	
+
 	@DeleteMapping("/eliminar/{id}")
-	public boolean eliminar(@PathVariable("id") Long id) {
+	public boolean eliminar(@RequestHeader(value = "Authorization") String token, @PathVariable("id") Long id) {
+		if (!validarToken(token)) {
+			return false;
+		}
 		return usuarioController.eleminarUsuario(id);
 	}
+	
+	private boolean validarToken(String token) {
+        String usuarioId = jwtUtil.getKey(token);
+        return usuarioId != null;
+    }
 }
