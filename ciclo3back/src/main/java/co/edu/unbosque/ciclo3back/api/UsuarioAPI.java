@@ -45,7 +45,10 @@ public class UsuarioAPI {
 	}
 
 	@PutMapping("/actualizar")
-	public boolean actualizar(@RequestBody Usuario usuarios) {
+	public boolean actualizar(@RequestHeader(value = "Authorization") String token, @RequestBody Usuario usuarios) {
+		if (!validarToken(token)) {
+			return false;
+		}
 		return usuarioController.actualizarUsuario(usuarios);
 	}
 

@@ -86,6 +86,7 @@ public class UsuarioJSON {
 		http.setDoOutput(true);
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		String data = "{" + "\"cedula_usuario\":\"" + usuario.getCedula_usuario() + "\",\"email_usuario\": \""
 				+ usuario.getEmail_usuario() + "\",\"nombre_usuario\": \"" + usuario.getNombre_usuario()
 				+ "\",\"password\":\"" + usuario.getPassword() + "\",\"usuario\":\"" + usuario.getUsuario() + "\"}";
