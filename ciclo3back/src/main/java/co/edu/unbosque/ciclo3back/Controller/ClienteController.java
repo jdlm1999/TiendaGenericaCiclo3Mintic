@@ -3,59 +3,67 @@ package co.edu.unbosque.ciclo3back.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
 import co.edu.unbosque.ciclo3back.dao.ClienteDAO;
 import co.edu.unbosque.ciclo3back.model.Cliente;
 
-@Service
-public class ClienteController {
+@Controller
+public class ClienteController implements ControllerInterface<Cliente> {
 
 	@Autowired
 	private ClienteDAO clienteDao;
 
-	public boolean guardarCliente(Cliente cliente) {
+	@Override
+	public boolean guardar(Cliente agregar) {
 		try {
-			clienteDao.save(cliente);
+			clienteDao.save(agregar);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al agregar al cliente.");
 			return false;
 		}
 	}
 
-	public Cliente obtenerByCedula(Long id) {
+	@Override
+	public Cliente obtenerById(Long id) {
 		try {
 			return clienteDao.findById(id).get();
 		} catch (Exception e) {
-			System.err.println("Error: No funciono jeje");
+			System.err.println("Error: Al obtener al cliente.");
 			return null;
 		}
 	}
 
+	@Override
 	public List<Cliente> obtenerTodos() {
 		try {
 			return clienteDao.findAll();
 		} catch (Exception e) {
+			System.err.println("Error: Al obtener los clientes.");
 			return null;
 		}
 	}
 
-	public boolean actualizarCliente(Cliente cliente) {
+	@Override
+	public boolean actualizar(Cliente actualizar) {
 		try {
-			clienteDao.save(cliente);
+			clienteDao.save(actualizar);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al actualizar al cliente.");
 			return false;
 		}
 	}
 
-	public boolean eleminarCliente(Long id) {
+	@Override
+	public boolean eliminar(Long id) {
 		try {
 			clienteDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al eliminar al cliente.");
 			return false;
 		}
 	}
-
 }

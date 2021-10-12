@@ -4,63 +4,71 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
 import co.edu.unbosque.ciclo3back.dao.UsuarioDAO;
 import co.edu.unbosque.ciclo3back.model.Usuario;
-import co.edu.unbosque.ciclo3back.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 
 @Controller
-public class UsuarioController {
+public class UsuarioController implements ControllerInterface<Usuario> {
 
 	@Autowired
 	private UsuarioDAO usuarioDao;
 
-	public boolean guardarUsuario(Usuario usuario) {
+	@Override
+	public boolean guardar(Usuario agregar) {
 		try {
 			Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-			String hash = argon2.hash(1, 1024, 1, usuario.getPassword());
-			usuario.setPassword(hash);
-			usuarioDao.save(usuario);
+			String hash = argon2.hash(1, 1024, 1, agregar.getPassword());
+			agregar.setPassword(hash);
+			usuarioDao.save(agregar);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al agregar al usuario.");
+			System.err.println(e.getMessage());
 			return false;
 		}
 	}
 
-	public Usuario obtenerByCedula(Long id) {
+	@Override
+	public Usuario obtenerById(Long id) {
 		try {
 			return usuarioDao.findById(id).get();
 		} catch (Exception e) {
-			System.err.println("Error: No funciono jeje");
+			System.err.println("Error: Al obtener al usuario.");
 			return null;
 		}
 	}
-
+	
+	@Override
 	public List<Usuario> obtenerTodos() {
 		try {
 			return usuarioDao.findAll();
 		} catch (Exception e) {
+			System.err.println("Error: Al obtener los usuarios.");
 			return null;
 		}
 	}
 
-	public boolean actualizarUsuario(Usuario usuario) {
+	@Override
+	public boolean actualizar(Usuario actualizar) {
 		try {
-			usuarioDao.save(usuario);
+			usuarioDao.save(actualizar);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al actualizar al usuario.");
 			return false;
 		}
 	}
 
-	public boolean eleminarUsuario(Long id) {
+	@Override
+	public boolean eliminar(Long id) {
 		try {
 			usuarioDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
+			System.err.println("Error: Al eliminar al usuario.");
 			return false;
 		}
 	}

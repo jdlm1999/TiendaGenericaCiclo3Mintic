@@ -3,7 +3,9 @@ package co.edu.unbosque.ciclo3back.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.server.ResponseStatusException;
 
 import co.edu.unbosque.ciclo3back.dao.UsuarioDAO;
 import co.edu.unbosque.ciclo3back.model.Login;
@@ -43,8 +45,7 @@ public class LoginController {
 				return "Credenciales Incorrectas";
 			}
 		} catch (Exception e) {
-			System.err.println("Error: No funciono jeje");
-			return null;
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Problems in the server");
 		}
 	}
 }
