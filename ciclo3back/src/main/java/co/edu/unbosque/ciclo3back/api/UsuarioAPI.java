@@ -27,8 +27,8 @@ public class UsuarioAPI {
     private JWTUtil jwtUtil;
 
 	@PostMapping("/crear")
-	public boolean guardar(@RequestBody Usuario usuarios) {
-		return usuarioController.guardarUsuario(usuarios);
+	public void guardar(@RequestBody Usuario usuarios) {
+		usuarioController.guardarUsuario(usuarios);
 	}
 
 	@GetMapping("/obtener/{id}")
@@ -38,26 +38,22 @@ public class UsuarioAPI {
 
 	@GetMapping("/listar")
 	public List<Usuario> listar(@RequestHeader(value = "Authorization") String token) {
-		if (!validarToken(token)) {
-			System.out.println("");
+		if (!validarToken(token)) 
 			return null;
-		}
 		return usuarioController.obtenerTodos();
 	}
 
 	@PutMapping("/actualizar")
 	public boolean actualizar(@RequestHeader(value = "Authorization") String token, @RequestBody Usuario usuarios) {
-		if (!validarToken(token)) {
+		if (!validarToken(token))
 			return false;
-		}
 		return usuarioController.actualizarUsuario(usuarios);
 	}
 
 	@DeleteMapping("/eliminar/{id}")
 	public boolean eliminar(@RequestHeader(value = "Authorization") String token, @PathVariable("id") Long id) {
-		if (!validarToken(token)) {
+		if (!validarToken(token))
 			return false;
-		}
 		return usuarioController.eleminarUsuario(id);
 	}
 	

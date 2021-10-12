@@ -42,11 +42,9 @@ public class LoginController {
 			} else {
 				return "Credenciales Incorrectas";
 			}
-
 		} catch (Exception e) {
 			System.err.println("Error: No funciono jeje");
 			return null;
 		}
 	}
-
 }

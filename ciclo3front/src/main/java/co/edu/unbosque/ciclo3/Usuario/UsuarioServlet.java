@@ -1,6 +1,7 @@
 package co.edu.unbosque.ciclo3.Usuario;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -55,9 +56,6 @@ public class UsuarioServlet extends HttpServlet {
 			case "/delete":
 				deleteUser(request, response);
 				break;
-//			case "/edit":
-//				showEditForm(request, response);
-//				break;
 			case "/update":
 				updateUser(request, response);
 				break;
@@ -70,74 +68,61 @@ public class UsuarioServlet extends HttpServlet {
 		}
 	}
 
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	private void listUser(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {		
+			throws IOException, ServletException {
 		try {
 			ArrayList<Usuario> lista = UsuarioJSON.getJSON();
-			if(lista.isEmpty()) {
+			if (lista.isEmpty()) {
 				System.out.println("Error: La lista se encuentra vacia");
 			}
 			request.setAttribute("lista", lista);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.err.println("Error al listar los usuarios.");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-form.jsp");
-		dispatcher.forward(request, response);
-	}
-//
-//	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, ServletException, IOException {
-//		int id = Integer.parseInt(request.getParameter("id"));
-//		User existingUser = userDAO.selectUser(id);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-//		request.setAttribute("user", existingUser);
-//		dispatcher.forward(request, response);
-//
-//	}
-//
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException {
+	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Usuario nuevo = new Usuario();
 		nuevo.setUsuario(request.getParameter("usuario"));
 		nuevo.setPassword(request.getParameter("password"));
 		nuevo.setNombre_usuario(request.getParameter("nombre"));
 		nuevo.setEmail_usuario(request.getParameter("email"));
 		nuevo.setCedula_usuario(Long.parseLong(request.getParameter("cedula")));
-		
+
 		int rta = 0;
 		try {
 			rta = UsuarioJSON.postJSON(nuevo);
 			response.sendRedirect("list");
-//			PrintWriter writter = response.getWriter();
-//			if (rta == 200)
-//				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
-//			else
-//				writter.println(" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
+			PrintWriter writter = response.getWriter();
+			if (rta == 200)
+				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
+			else
+				writter.println(
+						" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void updateUser(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException {
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Usuario actualizar = new Usuario();
 		actualizar.setUsuario(request.getParameter("usuario"));
 		actualizar.setPassword(request.getParameter("password"));
 		actualizar.setNombre_usuario(request.getParameter("nombre"));
 		actualizar.setEmail_usuario(request.getParameter("email"));
 		actualizar.setCedula_usuario(Long.parseLong(request.getParameter("cedula")));
-		
+
 		int rta = 0;
 		try {
 			rta = UsuarioJSON.putJSON(actualizar);
@@ -152,8 +137,7 @@ public class UsuarioServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException {
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Long cedulaEliminar = Long.parseLong(request.getParameter("cedula"));
 		int rta = 0;
 		try {
