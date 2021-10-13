@@ -13,7 +13,7 @@
 </link>
 <link rel="stylesheet" href="Styles/styles.css">
 <meta charset="utf-8">
-<title>Test</title>
+<title>Tienda Generica</title>
 </head>
 <body>
 	<header>
