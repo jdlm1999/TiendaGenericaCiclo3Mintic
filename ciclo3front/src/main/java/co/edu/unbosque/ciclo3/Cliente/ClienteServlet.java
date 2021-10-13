@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.parser.ParseException;
 
+import co.edu.unbosque.ciclo3.Usuario.Usuario;
+import co.edu.unbosque.ciclo3.Usuario.UsuarioJSON;
+
 
 /**
  * Servlet implementation class ClienteServlet
@@ -44,21 +47,21 @@ public class ClienteServlet extends HttpServlet {
 
 		try {
 			switch (action) {
-			case "/newClient":
+			case "/new":
 				showNewForm(request, response);
 				break;
 			case "/insertClient":
 				insertUser(request, response);
 				break;
-//			case "/deleteClient":
-//				deleteUser(request, response);
+			case "/delete":
+				deleteClient(request, response);
+				break;
+//			case "/edit":
+//				showEditForm(request, response);
 //				break;
-////			case "/edit":
-////				showEditForm(request, response);
-////				break;
-//			case "/updateClient":
-//				updateUser(request, response);
-//				break;
+			case "/update":
+				updateClient(request, response);
+				break;
 			default:
 				listUser(request, response);
 				break;
@@ -77,7 +80,6 @@ public class ClienteServlet extends HttpServlet {
 			}
 			request.setAttribute("lista", lista);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Cliente/client-list.jsp");
-			System.out.println("----------------------------------------------------------------------");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
 			request.setAttribute("error", e.getMessage());
@@ -113,6 +115,46 @@ public class ClienteServlet extends HttpServlet {
 //				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
 //			else
 //				writter.println(" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void updateClient(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Cliente actualizar = new Cliente();
+		actualizar.setNombre_cliente(request.getParameter("nombre"));
+		actualizar.setEmail_cliente(request.getParameter("email"));
+		actualizar.setTelefono_cliente(request.getParameter("telefono"));
+		actualizar.setDireccion_cliente(request.getParameter("direccion"));
+		actualizar.setCedula_cliente(Long.parseLong(request.getParameter("cedula")));
+
+		int rta = 0;
+		try {
+			rta = ClienteJSON.putJSON(actualizar);
+			response.sendRedirect("list");
+//			PrintWriter writter = response.getWriter();
+//			if (rta == 200)
+//				writter.println(" Usuario con c�dula: " + actualizar.getCedula_usuario() + " ha sido actualizado con exito!!");
+//			else
+//				writter.println(" Error: No ha sido posible actualizar al usuario con c�dula: " + actualizar.getCedula_usuario());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Long cedulaEliminar = Long.parseLong(request.getParameter("cedula"));
+		int rta = 0;
+		try {
+			System.out.println(cedulaEliminar);
+			rta = ClienteJSON.deleteJSON(cedulaEliminar);
+			response.sendRedirect("list");
+			System.out.println(rta);
+//			PrintWriter writter = response.getWriter();
+//			if (rta == 200)
+//				writter.println(" Usuario con c�dula: " + cedulaEliminar + " ha sido eliminado con exito!!");
+//			else
+//				writter.println(" Error: No ha sido posible eliminar al usuario con cedul: " + cedulaEliminar);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,10 +1,13 @@
 @charset "ISO-8859-1";
 
+.jumbotron {
+	margin: 0px auto;
+	padding: 70px 30px;
+	display: flex;
+	align-content: center;
+}
+
 .row-content {
-  margin: 0px auto;
-  padding: 50px 0px;
-  border-top: 1px ridge;
-  border-left: 1px ridge;
-  border-right: 1px ridge;
-  border-bottom: 1px ridge;
+	padding: 50px 0px;
+	margin: 0px auto;
 }

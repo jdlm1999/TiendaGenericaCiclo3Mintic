@@ -44,7 +44,6 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
-		System.out.println(action);
 
 		try {
 			switch (action) {
@@ -56,7 +55,6 @@ public class UsuarioServlet extends HttpServlet {
 				break;
 			case "/delete":
 				deleteUser(request, response);
-				System.out.println("------------------------");
 				break;
 			case "/update":
 				updateUser(request, response);
@@ -107,14 +105,13 @@ public class UsuarioServlet extends HttpServlet {
 
 		int rta = 0;
 		try {
-			rta = UsuarioJSON.postJSON(nuevo);
-			response.sendRedirect("list");
 			PrintWriter writter = response.getWriter();
+			rta = UsuarioJSON.postJSON(nuevo);
+			System.out.println(rta);
 			if (rta == 200)
-				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
+				writter.println("Usuario Creado");
 			else
-				writter.println(
-						" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
+				writter.println("Usuario No Creado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

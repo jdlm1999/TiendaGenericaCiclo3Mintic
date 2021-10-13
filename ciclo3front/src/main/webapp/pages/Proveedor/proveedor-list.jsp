@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="utf-8"%>
-<%@ page import='co.edu.unbosque.ciclo3.Usuario.Usuario'%>
+<%@ page import='co.edu.unbosque.ciclo3.Proveedor.Proveedor'%>
 <%@ page import='java.util.ArrayList'%>
 <!DOCTYPE html>
 <html>
@@ -65,36 +65,36 @@
 							<thead class="thead-dark">
 
 								<tr>
-									<th>Cedula</th>
+									<th>NIT</th>
+									<th>Ciudad</th>
+									<th>Direccion</th>
 									<th>Nombre</th>
-									<th>Correo</th>
-									<th>Usuario</th>
-									<th>Password</th>
+									<th>Telefono</th>
 									<th>Actions</th>
 								</tr>
 							</thead>
 							<tbody>
 								<%
-								ArrayList<Usuario> lista = (ArrayList<Usuario>) request.getAttribute("lista");
-								for (Usuario usuario : lista) {
+								ArrayList<Proveedor> lista = (ArrayList<Proveedor>) request.getAttribute("lista");
+								for (Proveedor proveedor : lista) {
 								%>
 								<tr>
-									<td><%=usuario.getCedula_usuario()%></td>
-									<td><%=usuario.getNombre_usuario()%></td>
-									<td><%=usuario.getEmail_usuario()%></td>
-									<td><%=usuario.getUsuario()%></td>
-									<td>**********</td>
+									<td><%=proveedor.getNit_proveedor()%></td>
+									<td><%=proveedor.getCiudad_proveedor()%></td>
+									<td><%=proveedor.getDireccion_proveedor()%></td>
+									<td><%=proveedor.getNombre_proveedor()%></td>
+									<td><%=proveedor.getTelefono_proveedor()%></td>
 									<td><button type="button"
 											class="btn btn-info btn-circle btn-sm" data-bs-toggle="modal"
 											data-bs-target="#actualizarModal"
 											onClick="cedulaTableActualizar(this)"
-											name="<%=usuario.getCedula_usuario()%>">
+											name="<%=proveedor.getNit_proveedor()%>">
 											<i class='fas fa-cloud-upload-alt'></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-circle btn-sm"
 											data-bs-toggle="modal" data-bs-target="#eliminarModal"
 											onClick="cedulaTableEliminar(this)"
-											name="<%=usuario.getCedula_usuario()%>">
+											name="<%=proveedor.getNit_proveedor()%>">
 											<i class='fas fa-trash'></i>
 										</button></td>
 								</tr>

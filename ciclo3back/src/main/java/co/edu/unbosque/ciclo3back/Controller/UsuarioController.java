@@ -3,7 +3,9 @@ package co.edu.unbosque.ciclo3back.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.server.ResponseStatusException;
 
 import co.edu.unbosque.ciclo3back.dao.UsuarioDAO;
 import co.edu.unbosque.ciclo3back.model.Usuario;
@@ -26,8 +28,7 @@ public class UsuarioController implements ControllerInterface<Usuario> {
 			return true;
 		} catch (Exception e) {
 			System.err.println("Error: Al agregar al usuario.");
-			System.err.println(e.getMessage());
-			return false;
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
 	}
 
@@ -37,7 +38,7 @@ public class UsuarioController implements ControllerInterface<Usuario> {
 			return usuarioDao.findById(id).get();
 		} catch (Exception e) {
 			System.err.println("Error: Al obtener al usuario.");
-			return null;
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "You don't have Authorization");
 		}
 	}
 	

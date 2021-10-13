@@ -31,7 +31,12 @@ public class UsuarioAPI implements APIInterface<Usuario> {
 	@PostMapping("/crear")
 	public boolean guardar(@RequestHeader(value = "Authorization", required = false) String token,
 			@RequestBody Usuario usuarios) {
-		return usuarioController.guardar(usuarios);
+		try {
+			return usuarioController.guardar(usuarios);
+		} catch (Exception e) {
+			System.out.println("Entra exception");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+		}
 	}
 
 	@GetMapping("/obtener/{id}")

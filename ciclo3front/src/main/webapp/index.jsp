@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 </link>
-<link rel="stylesheet" href="Styles/styles.css">
+<link rel="stylesheet" href="styles/styles.css">
 <meta charset="utf-8">
 <title>Tienda Generica</title>
 </head>
@@ -36,7 +36,8 @@
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/ClienteServlet/list"><i
 								class='fas fa-users'></i> Clientes</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"><i
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ProveedorServlet/list"><i
 								class='fas fa-people-carry'></i> Proveedores</a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i
 								class='fas fa-store-alt'></i> Productos</a></li>
@@ -46,7 +47,11 @@
 								class='fas fa-clipboard-list'></i> Reportes</a></li>
 					</ul>
 					<form class="d-flex">
-						<span class="navbar-text"> <a href="<%=request.getContextPath()%>/LoginServlet/login"> <i
+						<a class="navbar-text"
+							href="<%=request.getContextPath()%>/UsuarioServlet/new">
+							<button type="button" class="btn btn-outline-secondary btn-sm">Crear</button>
+						</a> <span class="navbar-text"> <a
+							href="<%=request.getContextPath()%>/LoginServlet/login"> <i
 								class='fas fa-sign-in-alt'></i> Login
 						</a>
 						</span>
