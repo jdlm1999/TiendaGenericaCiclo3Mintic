@@ -80,9 +80,8 @@ public class ClienteServlet extends HttpServlet {
 			System.out.println("----------------------------------------------------------------------");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
-			System.err.println(e.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
-			request.setAttribute("error", "Prueba");
+			request.setAttribute("error", e.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
 			dispatcher.forward(request, response);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

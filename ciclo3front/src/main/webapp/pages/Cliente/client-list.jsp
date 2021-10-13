@@ -2,7 +2,6 @@
 	pageEncoding="utf-8"%>
 <%@ page import='co.edu.unbosque.ciclo3.Cliente.Cliente'%>
 <%@ page import='java.util.ArrayList'%>
-<!DOCTYPE html>
 <html>
 <head>
 <title>User Management Application</title>

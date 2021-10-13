@@ -87,15 +87,11 @@ public class UsuarioServlet extends HttpServlet {
 			}
 			request.setAttribute("lista", lista);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
-			PrintWriter out = response.getWriter();
-			out.print("<script language='JavaScript'>alert('Hello');</script>");
-			
 			dispatcher.forward(request, response);
 		} catch (IOException exception) {
-			System.err.println(exception.getMessage());
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
-//			request.setAttribute("error", "Prueba");
-//			dispatcher.forward(request, response);
+			request.setAttribute("error", exception.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+			dispatcher.forward(request, response);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
