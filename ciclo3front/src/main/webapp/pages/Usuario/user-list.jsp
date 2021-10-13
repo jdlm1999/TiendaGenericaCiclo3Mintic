@@ -146,7 +146,7 @@
 							<div class="col-md-10">
 								<input type="text" class="form-control"
 									id="inputCedulaUsuarioActualizar" name="cedula"
-									placeholder="Cedula">
+									placeholder="Cedula" readonly>
 							</div>
 						</div>
 						<div class="form-row">
@@ -176,7 +176,7 @@
 							del Usuario: </label> <input type="text"
 							class="form-control form-control-sm mr-1"
 							id="inputCedulaUsuarioEliminar" placeholder="Cédula del Usuario"
-							name="cedula">
+							name="cedula" readonly>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"

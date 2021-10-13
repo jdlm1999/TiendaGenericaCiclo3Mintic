@@ -77,10 +77,13 @@ public class ClienteServlet extends HttpServlet {
 			}
 			request.setAttribute("lista", lista);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Cliente/client-list.jsp");
+			System.out.println("----------------------------------------------------------------------");
 			dispatcher.forward(request, response);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
+			request.setAttribute("error", "Prueba");
+			dispatcher.forward(request, response);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

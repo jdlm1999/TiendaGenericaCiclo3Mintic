@@ -36,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getPathInfo();
-		System.out.println(action);
 		try {
 			switch (action) {
 			case "/login":
@@ -78,8 +77,6 @@ public class LoginServlet extends HttpServlet {
 		try {
 			PrintWriter writter = response.getWriter();
 			rta = LoginJSON.postJSON(nuevo);
-//			response.sendRedirect("/ciclo3front");
-			System.out.println(rta);
 			if (rta == 200)
 				writter.println("success");
 			else if (rta == 404)

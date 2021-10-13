@@ -49,9 +49,8 @@
 				<h3 class="card-header bg-dark text-white">Iniciar Sesion</h3>
 				<div class="card-body">
 					<div class="row row-content">
-						<div class="col-12 col-md-9">
-
-
+						<div class="col-12">
+						
 							<div role="alert" id="alert">
 								<h4 class="alert-heading" id="msg"></h4>
 							</div>
@@ -59,9 +58,9 @@
 
 							<form action="init" method="post" id="loginForm">
 								<div class="form-group row">
-									<label for="usuario" class="col-md-2 col-form-label">Usuario:
+									<label for="usuario" class="col-md-12 col-form-label">Usuario:
 									</label>
-									<div class="col-md-10">
+									<div class="col-md-12">
 										<input type="text" class="form-control" id="usuario"
 											name="usuario" placeholder="Usuario">
 									</div>

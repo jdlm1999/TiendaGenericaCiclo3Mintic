@@ -44,6 +44,7 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
+		System.out.println(action);
 
 		try {
 			switch (action) {
@@ -55,6 +56,7 @@ public class UsuarioServlet extends HttpServlet {
 				break;
 			case "/delete":
 				deleteUser(request, response);
+				System.out.println("------------------------");
 				break;
 			case "/update":
 				updateUser(request, response);
@@ -64,7 +66,9 @@ public class UsuarioServlet extends HttpServlet {
 				break;
 			}
 		} catch (Exception e) {
-			System.err.println("Error");
+			System.err.println("Error: path");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -83,10 +87,15 @@ public class UsuarioServlet extends HttpServlet {
 			}
 			request.setAttribute("lista", lista);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
+			PrintWriter out = response.getWriter();
+			out.print("<script language='JavaScript'>alert('Hello');</script>");
+			
 			dispatcher.forward(request, response);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Error al listar los usuarios.");
+		} catch (IOException exception) {
+			System.err.println(exception.getMessage());
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
+//			request.setAttribute("error", "Prueba");
+//			dispatcher.forward(request, response);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -141,6 +150,7 @@ public class UsuarioServlet extends HttpServlet {
 		Long cedulaEliminar = Long.parseLong(request.getParameter("cedula"));
 		int rta = 0;
 		try {
+			System.out.println(cedulaEliminar);
 			rta = UsuarioJSON.deleteJSON(cedulaEliminar);
 			response.sendRedirect("list");
 			System.out.println(rta);
@@ -152,7 +162,6 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

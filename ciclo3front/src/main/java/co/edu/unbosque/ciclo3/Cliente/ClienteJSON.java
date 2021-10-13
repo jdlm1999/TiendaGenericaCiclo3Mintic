@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.ciclo3.Cliente.Cliente;
+import co.edu.unbosque.ciclo3.Login.LoginJSON;
 
 public class ClienteJSON {
 
@@ -34,6 +35,7 @@ public class ClienteJSON {
 		http.setDoOutput(true);
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		String data = "{" + "\"cedula_cliente\":\"" + cliente.getCedula_cliente() + "\",\"nombre_cliente\": \""
 				+ cliente.getNombre_cliente() + "\",\"email_cliente\": \"" + cliente.getEmail_cliente()
 				+ "\",\"telefono_cliente\":\"" + cliente.getTelefono_cliente() + "\",\"direccion_cliente\":\"" + cliente.getDireccion_cliente() + "\"}";
@@ -50,6 +52,7 @@ public class ClienteJSON {
 		HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		http.setRequestMethod("GET");
 		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		InputStream respuesta = http.getInputStream();
 		byte[] inp = respuesta.readAllBytes();
 		String json = "";
@@ -67,6 +70,7 @@ public class ClienteJSON {
 		HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		http.setRequestMethod("DELETE");
 		http.setRequestProperty("Accept", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		int respuesta = http.getResponseCode();
 		http.disconnect();
 		return respuesta;
@@ -84,6 +88,7 @@ public class ClienteJSON {
 		http.setDoOutput(true);
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		String data = "{" + "\"cedula_cliente\":\"" + cliente.getCedula_cliente() + "\",\"nombre_cliente\": \""
 				+ cliente.getNombre_cliente() + "\",\"email_cliente\": \"" + cliente.getEmail_cliente()
 				+ "\",\"telefono_cliente\":\"" + cliente.getTelefono_cliente() + "\",\"direccion_cliente\":\"" + cliente.getDireccion_cliente() + "\"}";

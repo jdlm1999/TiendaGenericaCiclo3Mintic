@@ -31,10 +31,10 @@
 				<div class="collapse navbar-collapse" id="Navbar">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							href="<%=request.getContextPath()%>/UsuarioServlet/new"><i
+							href="<%=request.getContextPath()%>/UsuarioServlet/list"><i
 								class='fas fa-user'></i> Usuarios</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/ClienteServlet/newClient"><i
+							href="<%=request.getContextPath()%>/ClienteServlet/list"><i
 								class='fas fa-users'></i> Clientes</a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i
 								class='fas fa-people-carry'></i> Proveedores</a></li>
