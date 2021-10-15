@@ -65,7 +65,7 @@ public class UsuarioServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			System.err.println("Error: path");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Error.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
