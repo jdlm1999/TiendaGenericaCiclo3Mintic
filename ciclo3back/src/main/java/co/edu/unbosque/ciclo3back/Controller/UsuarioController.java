@@ -103,4 +103,9 @@ public class UsuarioController implements ControllerInterface<Usuario> {
 		String usuarioId = jwtUtil.getKey(token);
 		return usuarioId != null;
 	}
+
+	@Override
+	public String guardar(Usuario agregar, String token) {
+		return null;
+	}
 }

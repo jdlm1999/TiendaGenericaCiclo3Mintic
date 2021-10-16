@@ -1,5 +1,6 @@
 package co.edu.unbosque.ciclo3back.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import co.edu.unbosque.ciclo3back.Controller.ProveedorController;
+import co.edu.unbosque.ciclo3back.model.Cliente;
 import co.edu.unbosque.ciclo3back.model.Proveedor;
 import co.edu.unbosque.ciclo3back.utils.JWTUtil;
+import io.jsonwebtoken.SignatureException;
 
 @RestController
 @RequestMapping("proveedores")
@@ -35,11 +38,26 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	public boolean guardar(@RequestHeader(value = "Authorization", required = false) String token,
 			@RequestBody Proveedor agregar, HttpServletResponse response) {
 		try {
-			if (!validarToken(token))
+			if (token == null || token.equals("")) {
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return false;
-			return true;
+			}
+			String rta = proveedorController.guardar(agregar);
+
+			if (rta.equals("Ya existe un proveedor con el NIT"))
+				response.setStatus(HttpServletResponse.SC_FOUND);
+			if (rta.equals("Credenciales invalidas"))
+				response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			if (rta.equals("Credenciales Vacias"))
+				response.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);
+			if (rta.equals("Proveedor Agregado")) {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return true;
+			}
+			return false;
 		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			return false;
 		}
 	}
 
@@ -48,11 +66,21 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	public Proveedor obtener(@RequestHeader(value = "Authorization", required = false) String token,
 			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
-			if (!validarToken(token))
+			if (token == null || token.equals("")) {
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return null;
-			return proveedorController.obtenerById(id, token);
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+			}
+			Proveedor ret = proveedorController.obtenerById(id, token);
+			if (ret == null) {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				return ret;
+			} else {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return ret;
+			}
+		} catch (SignatureException e) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			return null;
 		}
 	}
 
@@ -61,11 +89,19 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	public List<Proveedor> listar(@RequestHeader(value = "Authorization", required = false) String token,
 			HttpServletResponse response) {
 		try {
-			if (!validarToken(token))
-				return null;
-			return proveedorController.obtenerTodos(token);
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+			if (token == null || token.equals(""))
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+			ArrayList<Proveedor> ret = (ArrayList<Proveedor>) proveedorController.obtenerTodos(token);
+			if (ret == null)
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			else {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return ret;
+			}
+			return ret;
+		} catch (SignatureException e) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			return null;
 		}
 	}
 
@@ -74,11 +110,25 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	public boolean actualizar(@RequestHeader(value = "Authorization", required = false) String token,
 			@RequestBody Proveedor actualizar, HttpServletResponse response) {
 		try {
-			if (!validarToken(token))
+			if (token == null || token.equals("")) {
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return false;
-			return true;
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+			}
+			String rta = proveedorController.actualizar(actualizar, token);
+			if (rta.equals("No existe el Proveedor"))
+				response.setStatus(HttpServletResponse.SC_FOUND);
+			if (rta.equals("Credenciales Vacias"))
+				response.setStatus(HttpServletResponse.SC_PRECONDITION_FAILED);
+			if (rta.equals("Credenciales invalidas"))
+				response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			if (rta.equals("Proveedor Actualizado")) {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return true;
+			}
+			return false;
+		} catch (SignatureException e) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			return false;
 		}
 	}
 
@@ -87,11 +137,21 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	public boolean eliminar(@RequestHeader(value = "Authorization", required = false) String token,
 			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
-			if (!validarToken(token))
+			if (token == null || token.equals("")) {
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return false;
-			return true;
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+			}
+			String rta = proveedorController.eliminar(id, token);
+			if (rta.equals("No existe el proveedor"))
+				response.setStatus(HttpServletResponse.SC_FOUND);
+			if (rta.equals("Proveedor Eliminado")) {
+				response.setStatus(HttpServletResponse.SC_OK);
+				return true;
+			}
+			return false;
+		} catch (SignatureException e) {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			return false;
 		}
 	}
 

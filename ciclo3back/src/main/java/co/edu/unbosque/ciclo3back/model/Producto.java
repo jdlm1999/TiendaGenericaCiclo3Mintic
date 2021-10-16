@@ -11,14 +11,14 @@ public class Producto {
 
 	@Id
 	private Long codigo_producto;
-	@Column(nullable = false)
-	private double iva_compra;
-	@Column(nullable = false, length = 255)
-	private Long nit_proveedor;
 	@Column(nullable = false, length = 255)
 	private String nombre_producto;
+	@Column(nullable = false, length = 255)
+	private Long nit_proveedor;
 	@Column(nullable = false)
 	private double precio_compra;
+	@Column(nullable = false)
+	private double iva_compra;
 	@Column(nullable = false)
 	private double precio_venta;
 
