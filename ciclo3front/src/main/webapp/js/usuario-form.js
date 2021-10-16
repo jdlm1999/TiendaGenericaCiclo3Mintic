@@ -1,37 +1,30 @@
 /**
- * 
+ * Scripts de usuario-form.jsp
  */
 $(document).ready(function() {
-	
-	$("#para").scroll(function() {
-		$('.toast').toast('show');
-	});
-	
 	$("#alert").hide();
-	$("#loginForm").on('submit', function(event) {
+	$("#userForm").on('submit', function(event) {
 		event.preventDefault();
-		var f = $('#loginForm').serialize();
+		var f = $('#userForm').serialize();
 		console.log(f);
 
 		$.ajax({
-			url: "init",
+			url: "insert",
 			data: f,
 			type: 'POST',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
-				if (data.trim() == 'success') {
+				if (data.trim() == 'Creado') {
 					$("#alert").show();
-					$("#msg").html("Bienvenido a la tienda!!!");
+					$("#msg").html("Usuario Registrado");
 					$("#alert").addClass('alert alert-success align-items-center');
+					setTimeout(() => {
+						window.location.href = "../";
+					}, 2000);
 				}
-				else if (data.trim() == 'No Exist') {
+				else if (data.trim() == 'No Creado') {
 					$("#alert").show();
-					$("#msg").html("No hemos encontrado el usuario.");
-					$("#alert").addClass('alert alert-danger align-items-center');
-				}
-				else if (data.trim() == 'Incorrect') {
-					$("#alert").show();
-					$("#msg").html("Credenciales Incorrectas!!");
+					$("#msg").html("No ha sido posible crear el usuario.");
 					$("#alert").addClass('alert alert-danger align-items-center');
 				}
 			},

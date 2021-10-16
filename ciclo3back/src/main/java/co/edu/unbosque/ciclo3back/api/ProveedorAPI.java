@@ -2,6 +2,8 @@ package co.edu.unbosque.ciclo3back.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,11 +33,11 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	@Override
 	@PostMapping("/crear")
 	public boolean guardar(@RequestHeader(value = "Authorization", required = false) String token,
-			@RequestBody Proveedor agregar) {
+			@RequestBody Proveedor agregar, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return proveedorController.guardar(agregar);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -44,11 +46,11 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	@Override
 	@GetMapping("/obtener/{id}")
 	public Proveedor obtener(@RequestHeader(value = "Authorization", required = false) String token,
-			@PathVariable("id") Long id) {
+			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return null;
-			return proveedorController.obtenerById(id);
+			return proveedorController.obtenerById(id, token);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -56,11 +58,12 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 
 	@Override
 	@GetMapping("/listar")
-	public List<Proveedor> listar(@RequestHeader(value = "Authorization", required = false) String token) {
+	public List<Proveedor> listar(@RequestHeader(value = "Authorization", required = false) String token,
+			HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return null;
-			return proveedorController.obtenerTodos();
+			return proveedorController.obtenerTodos(token);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -69,11 +72,11 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	@Override
 	@PutMapping("/actualizar")
 	public boolean actualizar(@RequestHeader(value = "Authorization", required = false) String token,
-			@RequestBody Proveedor actualizar) {
+			@RequestBody Proveedor actualizar, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return proveedorController.actualizar(actualizar);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -82,11 +85,11 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 	@Override
 	@DeleteMapping("/eliminar/{id}")
 	public boolean eliminar(@RequestHeader(value = "Authorization", required = false) String token,
-			@PathVariable("id") Long id) {
+			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return proveedorController.eliminar(id);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}

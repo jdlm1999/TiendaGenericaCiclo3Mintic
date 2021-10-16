@@ -15,18 +15,18 @@ public class ProveedorController implements ControllerInterface<Proveedor>{
 	private ProveedorDAO proveedorDao;
 
 	@Override
-	public boolean guardar(Proveedor agregar) {
+	public String guardar(Proveedor agregar) {
 		try {
 			proveedorDao.save(agregar);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al agregar al proveedor.");
-			return false;
+			return "";
 		}
 	}
 
 	@Override
-	public Proveedor obtenerById(Long id) {
+	public Proveedor obtenerById(Long id, String token) {
 		try {
 			return proveedorDao.findById(id).get();
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class ProveedorController implements ControllerInterface<Proveedor>{
 	}
 
 	@Override
-	public List<Proveedor> obtenerTodos() {
+	public List<Proveedor> obtenerTodos(String token) {
 		try {
 			return proveedorDao.findAll();
 		} catch (Exception e) {
@@ -46,24 +46,24 @@ public class ProveedorController implements ControllerInterface<Proveedor>{
 	}
 
 	@Override
-	public boolean actualizar(Proveedor actualizar) {
+	public String actualizar(Proveedor actualizar, String token) {
 		try {
 			proveedorDao.save(actualizar);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al actualizar al proveedor.");
-			return false;
+			return "";
 		}
 	}
 
 	@Override
-	public boolean eliminar(Long id) {
+	public String eliminar(Long id, String token) {
 		try {
 			proveedorDao.deleteById(id);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al eliminar al proveedor.");
-			return false;
+			return "";
 		}
 	}
 }

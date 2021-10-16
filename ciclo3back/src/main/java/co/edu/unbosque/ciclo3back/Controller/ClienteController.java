@@ -15,18 +15,18 @@ public class ClienteController implements ControllerInterface<Cliente> {
 	private ClienteDAO clienteDao;
 
 	@Override
-	public boolean guardar(Cliente agregar) {
+	public String guardar(Cliente agregar) {
 		try {
 			clienteDao.save(agregar);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al agregar al cliente.");
-			return false;
+			return "";
 		}
 	}
 
 	@Override
-	public Cliente obtenerById(Long id) {
+	public Cliente obtenerById(Long id, String token) {
 		try {
 			return clienteDao.findById(id).get();
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class ClienteController implements ControllerInterface<Cliente> {
 	}
 
 	@Override
-	public List<Cliente> obtenerTodos() {
+	public List<Cliente> obtenerTodos(String token) {
 		try {
 			return clienteDao.findAll();
 		} catch (Exception e) {
@@ -46,24 +46,24 @@ public class ClienteController implements ControllerInterface<Cliente> {
 	}
 
 	@Override
-	public boolean actualizar(Cliente actualizar) {
+	public String actualizar(Cliente actualizar, String token) {
 		try {
 			clienteDao.save(actualizar);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al actualizar al cliente.");
-			return false;
+			return "";
 		}
 	}
 
 	@Override
-	public boolean eliminar(Long id) {
+	public String eliminar(Long id, String token) {
 		try {
 			clienteDao.deleteById(id);
-			return true;
+			return "";
 		} catch (Exception e) {
 			System.err.println("Error: Al eliminar al cliente.");
-			return false;
+			return "";
 		}
 	}
 }

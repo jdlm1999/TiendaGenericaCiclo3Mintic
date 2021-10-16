@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,17 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import co.edu.unbosque.ciclo3back.Controller.UsuarioController;
-import co.edu.unbosque.ciclo3back.model.Usuario;
+import co.edu.unbosque.ciclo3back.Controller.ProductoController;
+import co.edu.unbosque.ciclo3back.model.Producto;
 import co.edu.unbosque.ciclo3back.utils.JWTUtil;
 
 @RestController
 @RequestMapping("productos")
-public class ProductosAPI {
+public class ProductosAPI implements APIInterface<Producto>{
+	
+	@Autowired
+	private ProductoController productoController;
+	
+	@Autowired
+	private JWTUtil jwtUtil;
 
 	@PostMapping("/crear")
 	public void guardar(@RequestBody MultipartFile file) {
-		System.out.println("ENTRO API PRODUCTOS!!");
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
@@ -39,7 +47,7 @@ public class ProductosAPI {
 				stream.write(bytes);
 				stream.close();
 				System.out.println("You successfully uploaded!");
-				cargarLibros();
+				productoController.cargarLibros();
 			} catch (Exception e) {
 				System.err.println("You failed to upload => " + e.getMessage());
 			}
@@ -47,30 +55,61 @@ public class ProductosAPI {
 			System.err.println("You failed to upload because the file was empty.");
 		}
 	}
-	
-	
-	public static void cargarLibros() {
-		try {
-//			BufferedReader csvReader = new BufferedReader(new FileReader(
-//					"D:\\Mintic\\Ciclo 3\\Grupal\\ciclo3front\\src\\main\\webapp\\Documentos\\productos.csv"));
-			BufferedReader csvReader = new BufferedReader(new FileReader("Prueba.csv"));
 
-			String row;
-			while ((row = csvReader.readLine()) != null) {
-				String[] data = row.split(";");
-				System.out.println(data[0]);
-				System.out.println(data[1]);
-				System.out.println(data[2]);
-				System.out.println(data[3]);
-				System.out.println(data[4]);
-				System.out.println(data[5]);
-				System.out.println("----------------------------");
-			}
-			csvReader.close();
-			System.out.println("Continue and i think that its not a problem");
+	@Override
+	public boolean guardar(String token, Producto agregar, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Producto obtener(@RequestHeader(value = "Authorization", required = false) String token,
+			@PathVariable("id") Long id, HttpServletResponse response) {
+		try {
+			if (!validarToken(token))
+				return null;
+			return productoController.obtenerById(id, token);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			System.err.println("Error al cargar el archivo");
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
+	}
+
+	@Override
+	public List<Producto> listar(String token, HttpServletResponse response) {
+		try {
+			if (!validarToken(token))
+				return null;
+			return productoController.obtenerTodos(token);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+		}
+	}
+
+	@Override
+	public boolean actualizar(String token, Producto actualizar, HttpServletResponse response) {
+		try {
+			if (!validarToken(token))
+				return false;
+			return true;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+		}
+	}
+
+	@Override
+	public boolean eliminar(String token, Long id, HttpServletResponse response) {
+		try {
+			if (!validarToken(token))
+				return false;
+			return true;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
+		}
+	}
+	
+	public boolean validarToken(String token) {
+		String usuarioId = jwtUtil.getKey(token);
+		return usuarioId != null;
 	}
 }

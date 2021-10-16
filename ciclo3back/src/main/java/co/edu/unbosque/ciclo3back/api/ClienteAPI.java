@@ -1,6 +1,9 @@
 package co.edu.unbosque.ciclo3back.api;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,11 +34,11 @@ public class ClienteAPI implements APIInterface<Cliente> {
 	@Override
 	@PostMapping("/crear")
 	public boolean guardar(@RequestHeader(value = "Authorization", required = false) String token,
-			@RequestBody Cliente agregar) {
+			@RequestBody Cliente agregar, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return clienteController.guardar(agregar);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -44,11 +47,11 @@ public class ClienteAPI implements APIInterface<Cliente> {
 	@Override
 	@GetMapping("/obtener/{id}")
 	public Cliente obtener(@RequestHeader(value = "Authorization", required = false) String token,
-			@PathVariable("id") Long id) {
+			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return null;
-			return clienteController.obtenerById(id);
+			return clienteController.obtenerById(id, token);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -56,11 +59,12 @@ public class ClienteAPI implements APIInterface<Cliente> {
 
 	@Override
 	@GetMapping("/listar")
-	public List<Cliente> listar(@RequestHeader(value = "Authorization", required = false) String token) {
+	public List<Cliente> listar(@RequestHeader(value = "Authorization", required = false) String token,
+			HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return null;
-			return clienteController.obtenerTodos();
+			return clienteController.obtenerTodos(token);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -69,11 +73,11 @@ public class ClienteAPI implements APIInterface<Cliente> {
 	@Override
 	@PutMapping("/actualizar")
 	public boolean actualizar(@RequestHeader(value = "Authorization", required = false) String token,
-			@RequestBody Cliente actualizar) {
+			@RequestBody Cliente actualizar, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return clienteController.actualizar(actualizar);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}
@@ -82,11 +86,11 @@ public class ClienteAPI implements APIInterface<Cliente> {
 	@Override
 	@DeleteMapping("/eliminar/{id}")
 	public boolean eliminar(@RequestHeader(value = "Authorization", required = false) String token,
-			@PathVariable("id") Long id) {
+			@PathVariable("id") Long id, HttpServletResponse response) {
 		try {
 			if (!validarToken(token))
 				return false;
-			return clienteController.eliminar(id);
+			return true;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You don't have Authorization");
 		}

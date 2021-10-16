@@ -63,23 +63,22 @@ public class LoginServlet extends HttpServlet {
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Login/login-form.jsp");
-		
+
 		dispatcher.forward(request, response);
 	}
-	
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException {
+
+	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Login nuevo = new Login();
 		nuevo.setUsuario(request.getParameter("usuario"));
 		nuevo.setPassword(request.getParameter("password"));
-		
+
 		int rta = 0;
 		try {
 			PrintWriter writter = response.getWriter();
 			rta = LoginJSON.postJSON(nuevo);
-			if (rta == 200)
+			if (rta == 200) {
 				writter.println("success");
-			else if (rta == 404)
+			} else if (rta == 404)
 				writter.println("No Exist");
 			else if (rta == 401)
 				writter.println("Incorrect");

@@ -59,12 +59,20 @@ public class UsuarioServlet extends HttpServlet {
 			case "/update":
 				updateUser(request, response);
 				break;
+			case "/detail":
+				showUserDetail(request, response);
+				break;
+			case "/busqueda":
+				getOne(request, response);
+				break;
 			default:
 				listUser(request, response);
 				break;
 			}
 		} catch (Exception e) {
 			System.err.println("Error: path");
+			System.err.println(e.getMessage());
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -73,6 +81,12 @@ public class UsuarioServlet extends HttpServlet {
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-form.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void showUserDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-detail.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -109,9 +123,9 @@ public class UsuarioServlet extends HttpServlet {
 			rta = UsuarioJSON.postJSON(nuevo);
 			System.out.println(rta);
 			if (rta == 200)
-				writter.println("Usuario Creado");
+				writter.println("Creado");
 			else
-				writter.println("Usuario No Creado");
+				writter.println("No Creado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,6 +169,20 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void getOne(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Long cedulaBuscar= Long.parseLong(request.getParameter("busqueda"));
+			Usuario obtenido = UsuarioJSON.getOneJSON(cedulaBuscar);
+		} catch (IOException e) {
+			System.err.println("IO " + e.getMessage());
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.err.println("PS " + e.getMessage());
+		}
+
 	}
 
 }

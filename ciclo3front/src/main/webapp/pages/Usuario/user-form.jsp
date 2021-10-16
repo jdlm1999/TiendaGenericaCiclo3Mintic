@@ -127,52 +127,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-		crossorigin="anonymous"></script>
-
-	<script>
-		$(document).ready(function() {
-			$("#alert").hide();
-			$("#userForm").on('submit', function(event) {
-				event.preventDefault();
-				var f = $('#userForm').serialize();
-				console.log(f);
-
-				$.ajax({
-					url : "insert",
-					data : f,
-					type : 'POST',
-					success : function(data, textStatus, jqXHR) {
-						console.log(data);
-						if (data.trim() == 'Usuario Creado') {
-							$("#alert").show();
-							$("#msg").html("Usuario Creado");
-							$("#alert").addClass('alert alert-success align-items-center');
-						}
-						else if(data.trim() == 'Usuario No Creado'){
-							$("#alert").show();
-							$("#msg").html("Usuario No Creado");
-							$("#alert").addClass('alert alert-danger align-items-center');
-						}
-						else if(data.trim() == 'Incorrect'){
-							$("#alert").show();
-							$("#msg").html("Credenciales Incorrectas!!");
-							$("#alert").addClass('alert alert-danger align-items-center');
-						}
-					},
-					error : function(jqXHR, testStatus, errorThrown) {
-						console.log(data);
-						console.log("Error");
-					}
-				})
-				
-				setTimeout(() => {
-					$("#alert").hide('fade');
-					$("#alert").removeClass();
-				}, 2000);
-			})
-		})
-	</script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/usuario-form.js"></script>
 </body>
 </html>
