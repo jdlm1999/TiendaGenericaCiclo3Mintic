@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -28,6 +28,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import co.edu.unbosque.ciclo3.Login.LoginJSON;
+
 public class ProductJSON {
 
 	private static String sitio = "http://localhost:5000/";
@@ -37,6 +39,8 @@ public class ProductJSON {
     private String charset;
     private OutputStream outputStream;
     private PrintWriter writer;
+    
+	private static URL url;
 
     /**
      * This constructor initializes a new HTTP POST request with content type
@@ -53,8 +57,8 @@ public class ProductJSON {
         // creates a unique boundary based on time stamp
         boundary = "===" + System.currentTimeMillis() + "===";
 
-        URL url = new URL(sitio + "productos/crear");
-        httpConn = (HttpURLConnection) url.openConnection();
+        URL urlCarga = new URL(sitio + "productos/crear");
+        httpConn = (HttpURLConnection) urlCarga.openConnection();
         httpConn.setUseCaches(false);
         httpConn.setDoOutput(true); // indicates POST method
         httpConn.setDoInput(true);
@@ -183,6 +187,32 @@ public class ProductJSON {
 			csvReader.close();
 		} catch (Exception e) {
 			System.err.println("Error al cargar el archivo");
+		}
+	}
+	
+	public static JSONArray getJSON() throws IOException, ParseException {
+		url = new URL(sitio + "productos/listar/");
+		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		try {
+			http.setRequestMethod("GET");
+			http.setDoOutput(true);
+			http.setRequestProperty("Accept", "application/json");
+			http.setRequestProperty("Content-Type", "application/json");
+			http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
+			InputStream respuesta = http.getInputStream();
+			byte[] inp = respuesta.readAllBytes();
+			String json = "";
+			for (int i = 0; i < inp.length; i++) {
+				json += (char) inp[i];
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONArray productoJson = (JSONArray) jsonParser.parse(json);
+			http.disconnect();
+			System.out.println(productoJson);
+			return productoJson;
+		} catch (Exception e) {
+			System.out.println("Aqui " + e.getMessage());
+			return null;
 		}
 	}
 

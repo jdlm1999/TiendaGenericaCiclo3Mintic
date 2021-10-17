@@ -93,8 +93,6 @@ public class ProductoController implements ControllerInterface<Producto> {
 	}
 
 	public String cargarLibros(String token) {
-		if (!validarToken(token))
-			throw new SignatureException("El token no es valido");
 		try {
 			BufferedReader csvReader = new BufferedReader(new FileReader("Prueba.csv"));
 
@@ -103,10 +101,10 @@ public class ProductoController implements ControllerInterface<Producto> {
 			while ((row = csvReader.readLine()) != null) {
 				String[] data = row.split(";");
 				Long codigo_producto = Long.parseLong(data[0]);
-				double iva_compra = Double.parseDouble(data[1]);
+				String nombre_producto = data[1];
 				Long nit_proveedor = Long.parseLong(data[2]);
-				String nombre_producto = data[3];
-				double precio_compra = Double.parseDouble(data[4]);
+				double precio_compra = Double.parseDouble(data[3]);
+				double iva_compra = Double.parseDouble(data[4]);
 				double precio_venta = Double.parseDouble(data[5]);
 
 				agregar.setCodigo_producto(codigo_producto);

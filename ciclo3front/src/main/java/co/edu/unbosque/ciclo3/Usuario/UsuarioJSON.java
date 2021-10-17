@@ -131,6 +131,7 @@ public class UsuarioJSON {
 		JSONParser jsonParser = new JSONParser();
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		JSONArray usuarios = (JSONArray) jsonParser.parse(json);
+		System.err.println(usuarios);
 		Iterator i = usuarios.iterator();
 		while (i.hasNext()) {
 			JSONObject innerObj = (JSONObject) i.next();
