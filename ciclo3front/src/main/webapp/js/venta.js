@@ -4,7 +4,7 @@
 $(document).ready(function() {
 	$("#alert").hide();
 	console.log('entra');
-	
+
 	$("#buscarCliente").on('click', function(event) {
 		event.preventDefault();
 		var f = $('#formClient').serialize();
@@ -43,7 +43,9 @@ $(document).ready(function() {
 					$("#alert").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod1');
+					let val = document.getElementById('valor1');
 					ced.value = data.nombre_producto;
+					val.value = data.precio_venta;
 				}
 			}
 		});
@@ -65,7 +67,9 @@ $(document).ready(function() {
 					$("#alert").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod2');
+					let val = document.getElementById('valor2');
 					ced.value = data.nombre_producto;
+					val.value = data.precio_venta;
 				}
 			}
 		});
@@ -87,10 +91,33 @@ $(document).ready(function() {
 					$("#alert").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod3');
+					let val = document.getElementById('valor3');
 					ced.value = data.nombre_producto;
+					val.value = data.precio_venta;
 				}
 			}
 		});
+	});
+
+	$("#can1").on("change keyup paste", function() {
+		let val = document.getElementById('val1');
+		let can = document.getElementById('can1').value;
+		let valor = document.getElementById('valor1').value;
+		val.value = parseInt(valor) * parseInt(can);
+	});
+
+	$("#can2").on("change keyup paste", function() {
+		let val = document.getElementById('val2');
+		let can = document.getElementById('can2').value;
+		let valor = document.getElementById('valor2').value;
+		val.value = parseInt(valor) * parseInt(can);
+	});
+
+	$("#can3").on("change keyup paste", function() {
+		let val = document.getElementById('val3');
+		let can = document.getElementById('can3').value;
+		let valor = document.getElementById('valor3').value;
+		val.value = parseInt(valor) * parseInt(can);
 	});
 
 	$("#consultar").on('click', function(event) {

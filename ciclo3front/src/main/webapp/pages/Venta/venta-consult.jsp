@@ -48,8 +48,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="row row-content">
 		<div class="col-12 col-md-9">
 			<div class="card">
@@ -85,6 +85,14 @@
 									name="nomCod1" placeholder="nomCod1" value="" readonly>
 							</div>
 						</div>
+
+						<div class="form-group row">
+							<div class="col-md-4">
+								<input type="hidden" class="form-control" id="valor1"
+									name="valor1" placeholder="valor1" value="" readonly>
+							</div>
+						</div>
+
 						<div class="form-group row">
 							<label for="can1" class="col-md-2 col-form-label">Cantidad:</label>
 							<div class="col-md-4">
@@ -107,8 +115,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="row row-content">
 		<div class="col-12 col-md-9">
 			<div class="card">
@@ -144,6 +152,14 @@
 									name="nomCod2" placeholder="nomCod2" value="" readonly>
 							</div>
 						</div>
+
+						<div class="form-group row">
+							<div class="col-md-4">
+								<input type="hidden" class="form-control" id="valor2"
+									name="valor2" placeholder="valor2" value="" readonly>
+							</div>
+						</div>
+
 						<div class="form-group row">
 							<label for="can2" class="col-md-2 col-form-label">Cantidad:</label>
 							<div class="col-md-4">
@@ -166,7 +182,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<div class="row row-content">
 		<div class="col-12 col-md-9">
@@ -203,6 +219,14 @@
 									name="nomCod3" placeholder="nomCod3" value="" readonly>
 							</div>
 						</div>
+
+						<div class="form-group row">
+							<div class="col-md-4">
+								<input type="hidden" class="form-control" id="valor3"
+									name="valor3" placeholder="valor3" value="" readonly>
+							</div>
+						</div>
+
 						<div class="form-group row">
 							<label for="can3" class="col-md-2 col-form-label">Cantidad:</label>
 							<div class="col-md-4">
