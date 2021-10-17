@@ -76,6 +76,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			PrintWriter writter = response.getWriter();
 			rta = LoginJSON.postJSON(nuevo);
+			System.out.println(rta);
 			if (rta == 200) {
 				writter.println("success");
 			} else if (rta == 404)
