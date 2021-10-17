@@ -215,5 +215,31 @@ public class ProductJSON {
 			return null;
 		}
 	}
+	
+	public static JSONObject getOneJSON(Long id) throws IOException, ParseException {
+		url = new URL(sitio + "productos/obtener/" + id);
+		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		try {
+			http.setRequestMethod("GET");
+			http.setDoOutput(true);
+			http.setRequestProperty("Accept", "application/json");
+			http.setRequestProperty("Content-Type", "application/json");
+			http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
+			InputStream respuesta = http.getInputStream();
+			byte[] inp = respuesta.readAllBytes();
+			String json = "";
+			for (int i = 0; i < inp.length; i++) {
+				json += (char) inp[i];
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONObject productJson = (JSONObject) jsonParser.parse(json);
+			http.disconnect();
+			System.out.println("ProductJSON " + productJson);
+			return productJson;
+		} catch (Exception e) {
+			System.out.println("Aqui " + e.getMessage());
+			return null;
+		}
+	}
 
 }
