@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class UsuarioServlet
@@ -72,7 +76,7 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.err.println("Error: path");
 			System.err.println(e.getMessage());
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -83,30 +87,11 @@ public class UsuarioServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-form.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void showUserDetail(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-detail.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	private void listUser(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		try {
-			ArrayList<Usuario> lista = UsuarioJSON.getJSON();
-			if (lista.isEmpty()) {
-				System.out.println("Error: La lista se encuentra vacia");
-			}
-			request.setAttribute("lista", lista);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
-			dispatcher.forward(request, response);
-		} catch (IOException exception) {
-			request.setAttribute("error", exception.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
-			dispatcher.forward(request, response);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -121,12 +106,56 @@ public class UsuarioServlet extends HttpServlet {
 		try {
 			PrintWriter writter = response.getWriter();
 			rta = UsuarioJSON.postJSON(nuevo);
-			System.out.println(rta);
 			if (rta == 200)
 				writter.println("Creado");
-			else
-				writter.println("No Creado");
+			else if (rta == 302)
+				writter.println("Existe ID");
+			else if (rta == 406)
+				writter.println("Existe Credenciales");
+			else if (rta == 412)
+				writter.println("Vacias Credenciales");
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getOne(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		try {
+			PrintWriter writter = response.getWriter();
+			Long cedulaBuscar = Long.parseLong(request.getParameter("busqueda"));
+			JSONObject obtenido = UsuarioJSON.getOneJSON(cedulaBuscar);
+			if(obtenido == null) {
+				System.err.println("Nuloooo");
+				JSONParser jsonParser = new JSONParser();
+				String err = "{\"error\": \"No se encuentra\"}";
+				JSONObject error = (JSONObject) jsonParser.parse(err);
+				writter.println(error);
+			}
+			else
+				writter.println(obtenido);
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage() + " No tienes autorizacion!!!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+			dispatcher.forward(request, response);
+		}
+
+	}
+
+	private void listUser(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		try {
+			ArrayList<Usuario> lista = UsuarioJSON.getJSON();
+			if (lista.isEmpty()) {
+				System.out.println("Error: La lista se encuentra vacia");
+			}
+			request.setAttribute("lista", lista);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-list.jsp");
+			dispatcher.forward(request, response);
+		} catch (IOException exception) {
+			request.setAttribute("error", exception.getLocalizedMessage() + " No tienes autorizacion!!!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+			dispatcher.forward(request, response);
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
@@ -169,20 +198,6 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void getOne(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			Long cedulaBuscar= Long.parseLong(request.getParameter("busqueda"));
-			Usuario obtenido = UsuarioJSON.getOneJSON(cedulaBuscar);
-		} catch (IOException e) {
-			System.err.println("IO " + e.getMessage());
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.err.println("PS " + e.getMessage());
-		}
-
 	}
 
 }

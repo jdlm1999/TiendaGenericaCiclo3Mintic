@@ -56,6 +56,13 @@
 						</a>
 					</div>
 				</div>
+				<div class="row row-content">
+					<div class="col-12 col-md-9">
+						<a href="<%=request.getContextPath()%>/UsuarioServlet/detail">
+							<button type="button" class="btn btn-info">Busar Usuario</button>
+						</a>
+					</div>
+				</div>
 			</div>
 			<div class="row row-content">
 				<div class="col-12 col-md-9">

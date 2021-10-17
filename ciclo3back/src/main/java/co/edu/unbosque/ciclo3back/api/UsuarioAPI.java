@@ -76,8 +76,10 @@ public class UsuarioAPI implements APIInterface<Usuario> {
 	public List<Usuario> listar(@RequestHeader(value = "Authorization", required = false) String token,
 			HttpServletResponse response) throws ResponseStatusException {
 		try {
-			if (token == null || token.equals(""))
+			if (token == null || token.equals("")) {
 				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+				return null;
+			}
 			ArrayList<Usuario> ret = (ArrayList<Usuario>) usuarioController.obtenerTodos(token);
 			if (ret == null)
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
