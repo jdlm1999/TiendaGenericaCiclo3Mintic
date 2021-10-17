@@ -35,6 +35,7 @@ public class ProveedorJSON {
 		http.setDoOutput(true);
 		http.setRequestProperty("Accept", "application/json");
 		http.setRequestProperty("Content-Type", "application/json");
+		http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
 		String data = "{" + "\"nit_proveedor\":\"" + proveedor.getNit_proveedor() + "\",\"ciudad_proveedor\": \""
 				+ proveedor.getCiudad_proveedor() + "\",\"direccion_proveedor\": \""
 				+ proveedor.getDireccion_proveedor() + "\",\"nombre_proveedor\":\"" + proveedor.getNombre_proveedor()
@@ -45,6 +46,31 @@ public class ProveedorJSON {
 		int respuesta = http.getResponseCode();
 		http.disconnect();
 		return respuesta;
+	}
+	
+	public static JSONObject getOneJSON(Long id) throws IOException, ParseException {
+		url = new URL(sitio + "proveedores/obtener/" + id);
+		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		try {
+			http.setRequestMethod("GET");
+			http.setDoOutput(true);
+			http.setRequestProperty("Accept", "application/json");
+			http.setRequestProperty("Content-Type", "application/json");
+			http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
+			InputStream respuesta = http.getInputStream();
+			byte[] inp = respuesta.readAllBytes();
+			String json = "";
+			for (int i = 0; i < inp.length; i++) {
+				json += (char) inp[i];
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONObject proveedorJson = (JSONObject) jsonParser.parse(json);
+			http.disconnect();
+			return proveedorJson;
+		} catch (Exception e) {
+			System.out.println("Aqui " + e.getMessage());
+			return null;
+		}
 	}
 
 	public static ArrayList<Proveedor> getJSON() throws IOException, ParseException {

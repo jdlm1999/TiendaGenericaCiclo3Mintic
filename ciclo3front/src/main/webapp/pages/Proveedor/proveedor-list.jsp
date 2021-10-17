@@ -51,8 +51,17 @@
 			<div class="row row-content">
 				<div class="row row-content">
 					<div class="col-12 col-md-9">
-						<a href="<%=request.getContextPath()%>/UsuarioServlet/new">
-							<button type="button" class="btn btn-success">Agregar Usuario</button>
+						<a href="<%=request.getContextPath()%>/ProveedorServlet/new">
+							<button type="button" class="btn btn-success">Agregar
+								Proveedor</button>
+						</a>
+					</div>
+				</div>
+				<div class="row row-content">
+					<div class="col-12 col-md-9">
+						<a href="<%=request.getContextPath()%>/ProveedorServlet/detail">
+							<button type="button" class="btn btn-info">Busar
+								Proveedor</button>
 						</a>
 					</div>
 				</div>
@@ -121,52 +130,59 @@
 				<div class="modal-body">
 					<form action="update" method="post">
 						<div class="form-group row">
-							<label for="usuario" class="col-md-2 col-form-label">Usuario:
-							</label>
-							<div class="col-md-10">
-								<input type="text" class="form-control" id="usuario"
-									name="usuario" placeholder="Usuario">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="password" class="col-md-2 col-form-label">Password:
-							</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="nombre" class="col-md-2 col-form-label">Nombre
-								del Usuario: </label>
-							<div class="col-md-10">
-								<input type="text" class="form-control" id="nombre"
-									name="nombre" placeholder="Nombre">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="email" class="col-md-2 col-form-label">Email:
-							</label>
-							<div class="col-md-10">
-								<input type="email" class="form-control" id="email" name="email"
-									placeholder="Email">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="cedula" class="col-md-2 col-form-label">Cedula:
-							</label>
-							<div class="col-md-10">
-								<input type="text" class="form-control"
-									id="inputCedulaUsuarioActualizar" name="cedula"
-									placeholder="Cedula" readonly>
-							</div>
-						</div>
-						<div class="form-row">
-							<button type="button" class="btn btn-secondary btn-sm ml-auto"
-								id="cancelloginbutton">Cancel</button>
-							<input class="btn btn-danger" type="submit" value="Actualizar"
-								name="Actualizar">
-						</div>
+									<label for="nombre" class="col-md-2 col-form-label">Nombre:
+									</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="nombre"
+											name="nombre" placeholder="Nombre" required
+											oninvalid="this.setCustomValidity('Ingresar el nombre')"
+											oninput="setCustomValidity('')">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="email" class="col-md-2 col-form-label">Ciudad:
+									</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="ciudad"
+											name="ciudad" placeholder="Ciudad" required
+											oninvalid="this.setCustomValidity('Ingresar la ciudad')"
+											oninput="setCustomValidity('')">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="telefono" class="col-md-2 col-form-label">Telefono</label>
+									<div class="col-md-10">
+										<input type="tel" class="form-control" id="telefono"
+											name="telefono" placeholder="Telefono" required
+											oninvalid="this.setCustomValidity('Ingresar el telefono')"
+											oninput="setCustomValidity('')">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="direccion" class="col-md-2 col-form-label">Direccion:
+									</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="direccion"
+											name="direccion" placeholder="Direccion" required
+											oninvalid="this.setCustomValidity('Ingresar la direccion')"
+											oninput="setCustomValidity('')">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="cedula" class="col-md-2 col-form-label">NIT:
+									</label>
+									<div class="col-md-10">
+										<input type="number" class="form-control" id=inputCedulaUsuarioActualizar
+											name="nit" placeholder="NIT" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="offset-md-2 col-md-10">
+										<button type="submit" class="btn btn-success" value="Agregar"
+											name="Agregar">Actualizar</button>
+									</div>
+								</div>
 					</form>
 				</div>
 			</div>
@@ -177,18 +193,18 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Eliminar Usuario</h5>
+					<h5 class="modal-title">Eliminar Proveedor</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<form action="delete" method="post"">
-					<p>Esta seguro que desea eliminar el usuario con cédula:</p>
+					<p>Esta seguro que desea eliminar el Proveedor con NIT:</p>
 					<div class="form-group col-sm-4">
-						<label class="sr-only" for="inputCedulaUsuario"> Cédula
-							del Usuario: </label> <input type="text"
+						<label class="sr-only" for="inputCedulaUsuario"> NIT del
+							Proveedor: </label> <input type="text"
 							class="form-control form-control-sm mr-1"
 							id="inputCedulaUsuarioEliminar" placeholder="Cédula del Usuario"
-							name="cedula" readonly>
+							name="nit" readonly>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"

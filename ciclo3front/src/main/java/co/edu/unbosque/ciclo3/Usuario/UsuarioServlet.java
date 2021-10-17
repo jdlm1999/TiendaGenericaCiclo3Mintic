@@ -64,7 +64,7 @@ public class UsuarioServlet extends HttpServlet {
 				updateUser(request, response);
 				break;
 			case "/detail":
-				showUserDetail(request, response);
+				showDetail(request, response);
 				break;
 			case "/busqueda":
 				getOne(request, response);
@@ -88,7 +88,7 @@ public class UsuarioServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void showUserDetail(HttpServletRequest request, HttpServletResponse response)
+	private void showDetail(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Usuario/user-detail.jsp");
 		dispatcher.forward(request, response);
@@ -138,7 +138,6 @@ public class UsuarioServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
 			dispatcher.forward(request, response);
 		}
-
 	}
 
 	private void listUser(HttpServletRequest request, HttpServletResponse response)

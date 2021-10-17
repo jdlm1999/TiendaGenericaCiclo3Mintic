@@ -51,7 +51,7 @@
 				<div class="card-body">
 					<div class="row row-content">
 						<div class="col-12 col-md-9">
-							<form action="insert" method="post" id="clientForm">
+							<form action="insert" method="post" id="proveedorForm">
 								<div class="form-group row">
 									<label for="nombre" class="col-md-2 col-form-label">Nombre:
 									</label>
@@ -63,12 +63,12 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="email" class="col-md-2 col-form-label">Email:
+									<label for="email" class="col-md-2 col-form-label">Ciudad:
 									</label>
 									<div class="col-md-10">
-										<input type="email" class="form-control" id="email"
-											name="email" placeholder="Email" required
-											oninvalid="this.setCustomValidity('Ingresar el Email')"
+										<input type="text" class="form-control" id="ciudad"
+											name="ciudad" placeholder="Ciudad" required
+											oninvalid="this.setCustomValidity('Ingresar la ciudad')"
 											oninput="setCustomValidity('')">
 									</div>
 								</div>
@@ -77,7 +77,7 @@
 									<div class="col-md-10">
 										<input type="tel" class="form-control" id="telefono"
 											name="telefono" placeholder="Telefono" required
-											oninvalid="this.setCustomValidity('Ingresar el Telefono')"
+											oninvalid="this.setCustomValidity('Ingresar el telefono')"
 											oninput="setCustomValidity('')">
 									</div>
 								</div>
@@ -92,12 +92,12 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="cedula" class="col-md-2 col-form-label">Cedula:
+									<label for="cedula" class="col-md-2 col-form-label">NIT:
 									</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="cedula"
-											name="cedula" placeholder="Cedula" required
-											oninvalid="this.setCustomValidity('Ingresar la cedula')"
+										<input type="number" class="form-control" id="nit"
+											name="nit" placeholder="NIT" required
+											oninvalid="this.setCustomValidity('Ingresar el NIT')"
 											oninput="setCustomValidity('')">
 									</div>
 								</div>
@@ -109,7 +109,7 @@
 								<div class="form-group row">
 									<div class="offset-md-2 col-md-10">
 										<button type="submit" class="btn btn-success" value="Agregar"
-											name="Agregar">Agregar Usuario</button>
+											name="Agregar">Agregar Proveedor</button>
 									</div>
 								</div>
 							</form>
@@ -125,6 +125,6 @@
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous"></script>
 	<script src="../js/jquery-3.6.0.min.js"></script>
-	<script src="../js/client-form.js"></script>
+	<script src="../js/proveedor-form.js"></script>
 </body>
 </html>

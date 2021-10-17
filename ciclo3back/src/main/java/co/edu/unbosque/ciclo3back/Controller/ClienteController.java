@@ -22,13 +22,16 @@ public class ClienteController implements ControllerInterface<Cliente> {
 
 	@Override
 	public String guardar(Cliente agregar, String token) {
+		System.out.println("Entra agregar Cliente");
 		if (!validarToken(token))
 			throw new SignatureException("El token no es valido");
 		try {
 			if (clienteDao.existsById(agregar.getCedula_cliente()))
 				return "Ya existe un cliente con el id";
-			if (!agregar.getEmail_cliente().equals("") && !agregar.getNombre_cliente().equals("")) {
+			System.out.println("Intenta Agregar");
+			if (!agregar.getEmail_cliente().equals("")) {
 				clienteDao.save(agregar);
+				System.out.println("agrego");
 				return "Cliente Agregado";
 			} else
 				return "Credenciales Vacias";

@@ -15,9 +15,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import co.edu.unbosque.ciclo3.Login.LoginJSON;
 
 public class UsuarioJSON {
@@ -65,28 +62,14 @@ public class UsuarioJSON {
 			for (int i = 0; i < inp.length; i++) {
 				json += (char) inp[i];
 			}
-			int codeStatus = http.getResponseCode();
 			JSONParser jsonParser = new JSONParser();
-			Usuario usuario = new Usuario();
 			JSONObject usuarioJson = (JSONObject) jsonParser.parse(json);
-			usuario.setCedula_usuario(Long.parseLong(usuarioJson.get("cedula_usuario").toString()));
-			usuario.setEmail_usuario(usuarioJson.get("email_usuario").toString());
-			usuario.setNombre_usuario(usuarioJson.get("nombre_usuario").toString());
-			usuario.setPassword(usuarioJson.get("password").toString());
-			usuario.setUsuario(usuarioJson.get("usuario").toString());
-			if(codeStatus == 406) {
-				System.err.println("406 - json");
-			} else if (codeStatus == 200) {
-				System.err.println("200 - json");
-			}
 			http.disconnect();
-			System.out.println(usuarioJson);
 			return usuarioJson;
 		} catch (Exception e) {
 			System.out.println("Aqui " + e.getMessage());
 			return null;
 		}
-
 	}
 
 	public static ArrayList<Usuario> getJSON() throws IOException, ParseException {

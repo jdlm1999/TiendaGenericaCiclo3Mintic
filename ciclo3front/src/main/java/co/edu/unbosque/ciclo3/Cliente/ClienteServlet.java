@@ -1,6 +1,7 @@
 package co.edu.unbosque.ciclo3.Cliente;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.ciclo3.Usuario.Usuario;
@@ -50,17 +53,20 @@ public class ClienteServlet extends HttpServlet {
 			case "/new":
 				showNewForm(request, response);
 				break;
-			case "/insertClient":
+			case "/insert":
 				insertUser(request, response);
 				break;
 			case "/delete":
 				deleteClient(request, response);
 				break;
-//			case "/edit":
-//				showEditForm(request, response);
-//				break;
 			case "/update":
 				updateClient(request, response);
+				break;
+			case "/detail":
+				showDetail(request, response);
+				break;
+			case "/busqueda":
+				getOne(request, response);
 				break;
 			default:
 				listUser(request, response);
@@ -69,6 +75,12 @@ public class ClienteServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.err.println("Error");
 		}
+	}
+	
+	private void showDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Cliente/client-detail.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	private void listUser(HttpServletRequest request, HttpServletResponse response)
@@ -108,15 +120,41 @@ public class ClienteServlet extends HttpServlet {
 		
 		int rta = 0;
 		try {
+			PrintWriter writter = response.getWriter();
 			rta = ClienteJSON.postJSON(nuevo);
-			response.sendRedirect("list");
-//			PrintWriter writter = response.getWriter();
-//			if (rta == 200)
-//				writter.println(" Usuario con c�dula: " + nuevo.getCedula_usuario() + " ha sido creado con exito!!");
-//			else
-//				writter.println(" Error: No ha sido posible agregar al usuario con c�dula: " + nuevo.getCedula_usuario());
+			if (rta == 200)
+				writter.println("Creado");
+			else if (rta == 302)
+				writter.println("Existe ID");
+			else if (rta == 406)
+				writter.println("Existe Credenciales");
+			else if (rta == 412)
+				writter.println("Vacias Credenciales");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void getOne(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		try {
+			PrintWriter writter = response.getWriter();
+			Long cedulaBuscar = Long.parseLong(request.getParameter("busqueda"));
+			JSONObject obtenido = ClienteJSON.getOneJSON(cedulaBuscar);
+			if(obtenido == null) {
+				System.err.println("Nuloooo");
+				JSONParser jsonParser = new JSONParser();
+				String err = "{\"error\": \"No se encuentra\"}";
+				JSONObject error = (JSONObject) jsonParser.parse(err);
+				writter.println(error);
+			}
+			else
+				writter.println(obtenido);
+		} catch (IOException e) {
+			request.setAttribute("error", e.getMessage() + " No tienes autorizacion!!!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+			dispatcher.forward(request, response);
+		} catch (ParseException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	

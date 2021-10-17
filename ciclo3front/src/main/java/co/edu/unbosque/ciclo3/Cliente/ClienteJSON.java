@@ -15,7 +15,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import co.edu.unbosque.ciclo3.Cliente.Cliente;
 import co.edu.unbosque.ciclo3.Login.LoginJSON;
 
 public class ClienteJSON {
@@ -45,6 +44,31 @@ public class ClienteJSON {
 		int respuesta = http.getResponseCode();
 		http.disconnect();
 		return respuesta;
+	}
+	
+	public static JSONObject getOneJSON(Long id) throws IOException, ParseException {
+		url = new URL(sitio + "clientes/obtener/" + id);
+		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		try {
+			http.setRequestMethod("GET");
+			http.setDoOutput(true);
+			http.setRequestProperty("Accept", "application/json");
+			http.setRequestProperty("Content-Type", "application/json");
+			http.setRequestProperty("Authorization", LoginJSON.TOKEN_USER);
+			InputStream respuesta = http.getInputStream();
+			byte[] inp = respuesta.readAllBytes();
+			String json = "";
+			for (int i = 0; i < inp.length; i++) {
+				json += (char) inp[i];
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONObject clienteJson = (JSONObject) jsonParser.parse(json);
+			http.disconnect();
+			return clienteJson;
+		} catch (Exception e) {
+			System.out.println("Aqui " + e.getMessage());
+			return null;
+		}
 	}
 	
 	public static ArrayList<Cliente> getJSON() throws IOException, ParseException {
@@ -77,7 +101,7 @@ public class ClienteJSON {
 	}
 	
 	public static int putJSON(Cliente cliente) throws IOException {
-		url = new URL(sitio + "usuarios/actualizar");
+		url = new URL(sitio + "clientes/actualizar");
 		HttpURLConnection http;
 		http = (HttpURLConnection) url.openConnection();
 		try {

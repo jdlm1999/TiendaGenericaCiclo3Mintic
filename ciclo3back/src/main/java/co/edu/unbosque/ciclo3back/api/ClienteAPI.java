@@ -44,7 +44,8 @@ public class ClienteAPI implements APIInterface<Cliente> {
 				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return false;
 			}
-			String rta = clienteController.guardar(agregar);
+			System.err.println("Entra api cliente");
+			String rta = clienteController.guardar(agregar, token);
 
 			if (rta.equals("Ya existe un cliente con el id"))
 				response.setStatus(HttpServletResponse.SC_FOUND);
@@ -155,11 +156,6 @@ public class ClienteAPI implements APIInterface<Cliente> {
 			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
 			return false;
 		}
-	}
-
-	public boolean validarToken(String token) {
-		String usuarioId = jwtUtil.getKey(token);
-		return usuarioId != null;
 	}
 
 }

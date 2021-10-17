@@ -56,6 +56,13 @@
 						</a>
 					</div>
 				</div>
+				<div class="row row-content">
+					<div class="col-12 col-md-9">
+						<a href="<%=request.getContextPath()%>/ClienteServlet/detail">
+							<button type="button" class="btn btn-info">Busar Usuario</button>
+						</a>
+					</div>
+				</div>
 			</div>
 			<div class="row row-content">
 				<div class="col-12 col-md-9">
@@ -118,7 +125,7 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="updateClient" method="post">
+					<form action="update" method="post">
 						<div class="form-group row">
 							<label for="usuario" class="col-md-2 col-form-label">Usuario:
 							</label>
@@ -157,7 +164,7 @@
 							<div class="col-md-10">
 								<input type="text" class="form-control"
 									id="inputCedulaUsuarioActualizar" name="cedula"
-									placeholder="Cedula">
+									placeholder="Cedula" readonly>
 							</div>
 						</div>
 						<div class="form-row">
@@ -180,14 +187,14 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<form action="deleteClient" method="post"">
+				<form action="delete" method="post"">
 					<p>Esta seguro que desea eliminar el usuario con cédula:</p>
 					<div class="form-group col-sm-4">
 						<label class="sr-only" for="inputCedulaUsuario"> Cédula
 							del Usuario: </label> <input type="text"
 							class="form-control form-control-sm mr-1"
 							id="inputCedulaUsuarioEliminar" placeholder="Cédula del Usuario"
-							name="cedula">
+							name="cedula" readonly>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"

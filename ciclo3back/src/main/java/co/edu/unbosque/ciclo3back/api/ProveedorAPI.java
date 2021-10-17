@@ -42,7 +42,7 @@ public class ProveedorAPI implements APIInterface<Proveedor> {
 				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 				return false;
 			}
-			String rta = proveedorController.guardar(agregar);
+			String rta = proveedorController.guardar(agregar, token);
 
 			if (rta.equals("Ya existe un proveedor con el NIT"))
 				response.setStatus(HttpServletResponse.SC_FOUND);
