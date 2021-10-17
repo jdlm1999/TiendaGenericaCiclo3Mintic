@@ -2,6 +2,12 @@
  * 
  */
 $(document).ready(function() {
+	let total1 = 0;
+	let total2 = 0;
+	let total3 = 0;
+	let iva1 = 0;
+	let iva2 = 0;
+	let iva3 = 0;
 	$("#alertCliente").hide();
 	$("#alertP1").hide();
 	$("#alertP2").hide();
@@ -136,22 +142,50 @@ $(document).ready(function() {
 		let val = document.getElementById('val1');
 		let can = document.getElementById('can1').value;
 		let valor = document.getElementById('valor1').value;
-		val.value = parseInt(valor) * parseInt(can);
+		total1 = parseInt(valor) * parseInt(can);
+		iva1 = total1 * 0.19;
+		val.value = total1;
+		total();
 	});
 
 	$("#can2").on("change keyup paste", function() {
 		let val = document.getElementById('val2');
 		let can = document.getElementById('can2').value;
 		let valor = document.getElementById('valor2').value;
-		val.value = parseInt(valor) * parseInt(can);
+		total2 = parseInt(valor) * parseInt(can);
+		iva2 = total2 * 0.19;
+		val.value = total2;
+		total();
 	});
 
 	$("#can3").on("change keyup paste", function() {
 		let val = document.getElementById('val3');
 		let can = document.getElementById('can3').value;
 		let valor = document.getElementById('valor3').value;
-		val.value = parseInt(valor) * parseInt(can);
+		total3 = parseInt(valor) * parseInt(can);
+		iva3 = total3 * 0.19;
+		val.value = total3;
+		total();
 	});
+
+	$("#buscarCliente").on("click", function() {
+		console.log('change');
+		setTimeout(() => {
+			let val = document.getElementById('cedulaClienteVenta');
+			let can = document.getElementById('inputClienteEncontrado2').value;
+			console.log(can);
+			val.value = can;
+		}, 2000);
+	});
+
+	function total (){
+	let val = document.getElementById('valorVenta');
+	let val1 = document.getElementById('totalVenta');
+	let val3 = document.getElementById('ivaVenta');
+	val3.value = Math.round(iva1 + iva2 + iva3);
+	val.value = total1 + total2 + total3;
+	val1.value = Math.round((total1 + total2 + total3) + (iva1 + iva2 + iva3));
+	}
 
 	$("#consultar").on('click', function(event) {
 		event.preventDefault();

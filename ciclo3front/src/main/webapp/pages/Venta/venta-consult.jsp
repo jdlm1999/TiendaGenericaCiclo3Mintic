@@ -333,10 +333,75 @@
 				</div>
 			</div>
 
+			<div class="row row-content">
+				<div class="col-12 col-md-9">
+					<div class="card">
+						<div class="card-header">
+							<h3>Confirmacion Venta:</h3>
+						</div>
+						<div class="card-body">
+							<form action="createVenta" method="post" id="postVenta">
+
+								<div class="form-group row">
+									<div class="col-md-4">
+										<input type="hidden" class="form-control"
+											id="cedulaClienteVenta" name="cedulaClienteVenta"
+											placeholder="cedulaClienteVenta" value="" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-md-4">
+										<input type="hidden" class="form-control"
+											id="cedulaUsuarioVenta" name="cedulaUsuarioVenta"
+											placeholder="cedulaUsuarioVenta" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="val3" class="col-md-2 col-form-label">Valor del IVA: </label>
+									<div class="col-md-4">
+										<input type="text" class="form-control" id="ivaVenta"
+											name="ivaVenta" placeholder="ivaVenta" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="val3" class="col-md-2 col-form-label">Valor
+										de la venta: </label>
+									<div class="col-md-4">
+										<input type="text" class="form-control" id="valorVenta"
+											name="valorVenta" placeholder="valorVenta" readonly>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<label for="val3" class="col-md-2 col-form-label">Total de la venta: </label>
+									<div class="col-md-4">
+										<input type="text" class="form-control" id="totalVenta"
+											name="totalVenta" placeholder="totalVenta" readonly>
+									</div>
+								</div>
 
 
-			<button id="consultar" type="submit" class="btn btn-primary">
-				Send Feedback</button>
+								<div class="form-group row">
+									<div class="col-md-10">
+										<button id="crearVenta" type="submit" class="btn btn-primary"
+											value="crearVenta">Send Feedback</button>
+									</div>
+								</div>
+
+								<div role="alert" id="alertVenta">
+									<h4 class="alert-heading" id="msgVenta"></h4>
+								</div>
+
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
