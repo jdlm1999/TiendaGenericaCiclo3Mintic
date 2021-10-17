@@ -23,7 +23,7 @@ $(document).ready(function() {
 					var tr = document.getElementById('cards-products');
 					tr.innerHTML = '';
 					for (let i of data) {
-						tr.innerHTML += `<div class="card" style="width: 18rem;">
+						tr.innerHTML += `<div class="card-one" style="width: 18rem;">
   <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg" alt="Card image cap">
   <div class="card-body">
     <h3 class="card-title">${i.nombre_producto}</h3>

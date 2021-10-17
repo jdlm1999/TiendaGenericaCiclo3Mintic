@@ -39,9 +39,9 @@
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/ProveedorServlet/list"><i
 								class='fas fa-people-carry'></i> Proveedores</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"><i
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ProductoServlet/detail"><i
 								class='fas fa-store-alt'></i> Productos</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"><i
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/VentaServlet/venta"><i
 								class='fas fa-dollar-sign'></i> Ventas</a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i
 								class='fas fa-clipboard-list'></i> Reportes</a></li>

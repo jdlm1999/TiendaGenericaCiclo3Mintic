@@ -15,36 +15,50 @@
 </link>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand navbar-mr-auto"
-				href="<%=request.getContextPath()%>/"><img src="img/logo.png"
-				height="30" width="41"></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#Navbar"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="Navbar">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link active" href=""><i
-							class='fas fa-user'></i> Usuarios</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/ClienteServlet/list"><i
-							class='fas fa-users'></i> Clientes</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class='fas fa-people-carry'></i> Proveedores</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class='fas fa-store-alt'></i> Productos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
-							class='fas fa-clipboard-list'></i> Reportes</a></li>
-				</ul>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="<%=request.getContextPath()%>/"><img src="img/logo.png"
+					height="30" width="41"></a>
+
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#Navbar"
+					aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="Navbar">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							href="<%=request.getContextPath()%>/UsuarioServlet/list"><i
+								class='fas fa-user'></i> Usuarios</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ClienteServlet/list"><i
+								class='fas fa-users'></i> Clientes</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#"><i
+								class='fas fa-people-carry'></i> Proveedores</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ProductoServlet/detail"><i
+								class='fas fa-store-alt'></i> Productos</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/VentaServlet/venta"><i
+								class='fas fa-dollar-sign'></i> Ventas</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><i
+								class='fas fa-clipboard-list'></i> Reportes</a></li>
+					</ul>
+					<form class="d-flex">
+						<a class="navbar-text"
+							href="<%=request.getContextPath()%>/UsuarioServlet/new">
+							<button type="button" class="btn btn-outline-secondary btn-sm">Crear</button>
+						</a> <span class="navbar-text"> <a
+							href="<%=request.getContextPath()%>/LoginServlet/login"> <i
+								class='fas fa-sign-in-alt'></i> Login
+						</a>
+						</span>
+					</form>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</header>
 
 	<div class="jumbotron">
 		<div class="container">

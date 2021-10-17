@@ -21,7 +21,7 @@ $(document).ready(function() {
 					$("#alert").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('inputClienteEncontrado');
-					ced.value = data.cedula_cliente;
+					ced.value = data.nombre_cliente;
 				}
 			}
 		});
