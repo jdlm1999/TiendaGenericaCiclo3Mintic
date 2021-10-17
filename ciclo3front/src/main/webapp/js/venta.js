@@ -2,7 +2,10 @@
  * 
  */
 $(document).ready(function() {
-	$("#alert").hide();
+	$("#alertCliente").hide();
+	$("#alertP1").hide();
+	$("#alertP2").hide();
+	$("#alertP3").hide();
 	console.log('entra');
 
 	$("#buscarCliente").on('click', function(event) {
@@ -16,13 +19,22 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log(data);
 				if (data.error === 'No se encuentra') {
-					$("#alert").show();
-					$("#msg").html("No hemos encontrado el Proveedor.");
-					$("#alert").addClass('alert alert-danger align-items-center');
+					$("#alertCliente").show();
+					$("#msgCliente").html("No hemos encontrado el Cliente.");
+					$("#alertCliente").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('inputClienteEncontrado');
+					let ced2 = document.getElementById('inputClienteEncontrado2');
 					ced.value = data.nombre_cliente;
+					ced2.value = data.cedula_cliente;
+					$("#alertCliente").show();
+					$("#msgCliente").html("Se ha encontrado el cliente.");
+					$("#alertCliente").addClass('alert alert-success align-items-center');
 				}
+				setTimeout(() => {
+					$("#alertCliente").hide('fade');
+					$("#alertCliente").removeClass();
+				}, 2000);
 			}
 		});
 	});
@@ -38,15 +50,22 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log(data);
 				if (data.error === 'No se encuentra') {
-					$("#alert").show();
-					$("#msg").html("No hemos encontrado el Proveedor.");
-					$("#alert").addClass('alert alert-danger align-items-center');
+					$("#alertP1").show();
+					$("#msgP1").html("No hemos encontrado el Producto.");
+					$("#alertP1").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod1');
 					let val = document.getElementById('valor1');
 					ced.value = data.nombre_producto;
 					val.value = data.precio_venta;
+					$("#alertP1").show();
+					$("#msgP1").html("Se ha encontrado el Producto.");
+					$("#alertP1").addClass('alert alert-success align-items-center');
 				}
+				setTimeout(() => {
+					$("#alertP1").hide('fade');
+					$("#alertP1").removeClass();
+				}, 2000);
 			}
 		});
 	});
@@ -62,15 +81,22 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log(data);
 				if (data.error === 'No se encuentra') {
-					$("#alert").show();
-					$("#msg").html("No hemos encontrado el Proveedor.");
-					$("#alert").addClass('alert alert-danger align-items-center');
+					$("#alertP2").show();
+					$("#msgP2").html("No hemos encontrado el Producto.");
+					$("#alertP2").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod2');
 					let val = document.getElementById('valor2');
 					ced.value = data.nombre_producto;
 					val.value = data.precio_venta;
+					$("#alertP2").show();
+					$("#msgP2").html("Se ha encontrado el Producto.");
+					$("#alertP2").addClass('alert alert-success align-items-center');
 				}
+				setTimeout(() => {
+					$("#alertP2").hide('fade');
+					$("#alertP2").removeClass();
+				}, 2000);
 			}
 		});
 	});
@@ -86,15 +112,22 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log(data);
 				if (data.error === 'No se encuentra') {
-					$("#alert").show();
-					$("#msg").html("No hemos encontrado el Proveedor.");
-					$("#alert").addClass('alert alert-danger align-items-center');
+					$("#alertP3").show();
+					$("#msgP3").html("No hemos encontrado el Producto.");
+					$("#alertP3").addClass('alert alert-danger align-items-center');
 				} else {
 					let ced = document.getElementById('nomCod3');
 					let val = document.getElementById('valor3');
 					ced.value = data.nombre_producto;
 					val.value = data.precio_venta;
+					$("#alertP3").show();
+					$("#msgP3").html("Se ha encontrado el Producto.");
+					$("#alertP3").addClass('alert alert-success align-items-center');
 				}
+				setTimeout(() => {
+					$("#alertP3").hide('fade');
+					$("#alertP3").removeClass();
+				}, 2000);
 			}
 		});
 	});
