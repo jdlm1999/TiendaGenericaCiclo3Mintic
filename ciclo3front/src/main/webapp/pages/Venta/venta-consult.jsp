@@ -83,8 +83,7 @@
 								<div class="form-group row">
 									<div class="col-md-10">
 										<button id="buscarCliente" type="submit"
-											class="btn btn-primary" value="BuscarCliente">Send
-											Feedback</button>
+											class="btn btn-primary" value="BuscarCliente">Buscar Cliente</button>
 									</div>
 								</div>
 
@@ -122,7 +121,7 @@
 				<div class="col-12 col-md-9">
 					<div class="card">
 						<div class="card-header">
-							<h3>Cliente:</h3>
+							<h3>Producto 1:</h3>
 						</div>
 						<div class="card-body">
 							<form action="searchProduct3" method="post" id="formProduct1">
@@ -131,8 +130,7 @@
 
 
 								<div class="form-group row">
-									<label for="cod1" class="col-md-2 col-form-label">Cedula
-										Cliente</label>
+									<label for="cod1" class="col-md-2 col-form-label">Codigo del Producto</label>
 									<div class="col-md-4">
 										<input type="number" class="form-control" id="cod1"
 											name="cod1" placeholder="cod1">
@@ -141,8 +139,7 @@
 								<div class="form-group row">
 									<div class="col-md-10">
 										<button id="buscarProducto1" type="submit"
-											class="btn btn-primary" value="BuscarProducto1">Send
-											Feedback</button>
+											class="btn btn-primary" value="BuscarProducto1">Buscar Producto</button>
 									</div>
 								</div>
 
@@ -194,7 +191,7 @@
 				<div class="col-12 col-md-9">
 					<div class="card">
 						<div class="card-header">
-							<h3>Cliente:</h3>
+							<h3>Producto 2:</h3>
 						</div>
 						<div class="card-body">
 							<form action="searchProduct2" method="post" id="formProduct2">
@@ -203,8 +200,7 @@
 
 
 								<div class="form-group row">
-									<label for="cod2" class="col-md-2 col-form-label">Cedula
-										Cliente</label>
+									<label for="cod2" class="col-md-2 col-form-label">Codigo del Producto</label>
 									<div class="col-md-4">
 										<input type="number" class="form-control" id="cod2"
 											name="cod2" placeholder="cod2">
@@ -213,8 +209,7 @@
 								<div class="form-group row">
 									<div class="col-md-10">
 										<button id="buscarProducto2" type="submit"
-											class="btn btn-primary" value="BuscarProducto2">Send
-											Feedback</button>
+											class="btn btn-primary" value="BuscarProducto2">Buscar Producto</button>
 									</div>
 								</div>
 
@@ -266,7 +261,7 @@
 				<div class="col-12 col-md-9">
 					<div class="card">
 						<div class="card-header">
-							<h3>Cliente:</h3>
+							<h3>Producto 3:</h3>
 						</div>
 						<div class="card-body">
 							<form action="searchProduct" method="post" id="formProduct3">
@@ -275,8 +270,7 @@
 
 
 								<div class="form-group row">
-									<label for="cod3" class="col-md-2 col-form-label">Cedula
-										Cliente</label>
+									<label for="cod3" class="col-md-2 col-form-label">Codigo del producto</label>
 									<div class="col-md-4">
 										<input type="number" class="form-control" id="cod3"
 											name="cod3" placeholder="cod3">
@@ -285,8 +279,7 @@
 								<div class="form-group row">
 									<div class="col-md-10">
 										<button id="buscarProducto3" type="submit"
-											class="btn btn-primary" value="BuscarProducto3">Send
-											Feedback</button>
+											class="btn btn-primary" value="BuscarProducto3">Buscar Producto</button>
 									</div>
 								</div>
 

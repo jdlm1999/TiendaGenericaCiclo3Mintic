@@ -60,7 +60,7 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="card">
-				<h3 class="card-header bg-dark text-white">Agregar un Cliente</h3>
+				<h3 class="card-header bg-dark text-white">Agregar un Proveedor</h3>
 				<div class="card-body">
 					<div class="row row-content">
 						<div class="col-12 col-md-9">

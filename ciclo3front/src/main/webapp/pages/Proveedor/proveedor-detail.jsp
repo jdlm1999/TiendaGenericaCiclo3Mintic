@@ -71,7 +71,7 @@
 				<div class="form-group row">
 					<div class="col-md-12">
 						<button type="submit" class="btn btn-success" value="Buscar"
-							name="Buscar">Buscar Usuario</button>
+							name="Buscar">Buscar Proveedor</button>
 					</div>
 				</div>
 
@@ -82,7 +82,7 @@
 			</div>
 			<div class="row row-content">
 				<div class="col-12 col-md-9">
-					<h2>Usuarios Registrados</h2>
+					<h2>Proveedor Registrado</h2>
 					<div class="table-responsive">
 						<table class="table table-striped">
 							<thead class="thead-dark">

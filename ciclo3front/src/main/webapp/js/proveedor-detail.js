@@ -26,7 +26,7 @@ $(document).ready(function() {
 				<td>${data.telefono_proveedor}</td>
 				</tr>`
 					$("#alert").show();
-					$("#msg").html("Usuario Encontrado");
+					$("#msg").html("Proveedor Encontrado");
 					$("#alert").addClass('alert alert-success align-items-center');
 				}
 			}

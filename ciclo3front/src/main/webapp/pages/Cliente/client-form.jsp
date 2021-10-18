@@ -122,7 +122,7 @@
 								<div class="form-group row">
 									<div class="offset-md-2 col-md-10">
 										<button type="submit" class="btn btn-success" value="Agregar"
-											name="Agregar">Agregar Usuario</button>
+											name="Agregar">Agregar Cliente</button>
 									</div>
 								</div>
 							</form>

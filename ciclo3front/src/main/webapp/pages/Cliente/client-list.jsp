@@ -40,9 +40,11 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/ProductoServlet/detail"><i
 							class='fas fa-store-alt'></i> Productos</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/VentaServlet/venta"><i
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/VentaServlet/venta"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">
@@ -66,21 +68,22 @@
 					<div class="col-12 col-md-9">
 						<a href="<%=request.getContextPath()%>/ClienteServlet/new">
 							<button type="button" class="btn btn-success">Agregar
-								Usuario</button>
+								Cliente</button>
 						</a>
 					</div>
 				</div>
 				<div class="row row-content">
 					<div class="col-12 col-md-9">
 						<a href="<%=request.getContextPath()%>/ClienteServlet/detail">
-							<button type="button" class="btn btn-info">Busar Usuario</button>
+							<button type="button" class="btn btn-info">Buscar
+								Cliente</button>
 						</a>
 					</div>
 				</div>
 			</div>
 			<div class="row row-content">
 				<div class="col-12 col-md-9">
-					<h2>Usuarios Registrados</h2>
+					<h2>Clientes Registrados</h2>
 					<div class="table-responsive">
 						<table class="table table-striped">
 							<thead class="thead-dark">
@@ -141,22 +144,6 @@
 				<div class="modal-body">
 					<form action="update" method="post">
 						<div class="form-group row">
-							<label for="usuario" class="col-md-2 col-form-label">Usuario:
-							</label>
-							<div class="col-md-10">
-								<input type="text" class="form-control" id="usuario"
-									name="usuario" placeholder="Usuario">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="password" class="col-md-2 col-form-label">Password:
-							</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" id="password"
-									name="password" placeholder="Password">
-							</div>
-						</div>
-						<div class="form-group row">
 							<label for="nombre" class="col-md-2 col-form-label">Nombre
 								del Usuario: </label>
 							<div class="col-md-10">
@@ -172,6 +159,24 @@
 									placeholder="Email">
 							</div>
 						</div>
+						<div class="form-group row">
+							<label for="telefono" class="col-md-2 col-form-label">Telefono:
+							</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="telefono"
+									name="telefono" placeholder="telefono">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="direccion" class="col-md-2 col-form-label">Direccion:
+							</label>
+							<div class="col-md-10">
+								<input type="direccion" class="form-control" id="direccion"
+									name="direccion" placeholder="direccion">
+							</div>
+						</div>
+
+
 						<div class="form-group row">
 							<label for="cedula" class="col-md-2 col-form-label">Cedula:
 							</label>
@@ -197,15 +202,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Eliminar Usuario</h5>
+					<h5 class="modal-title">Eliminar Cliente</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<form action="delete" method="post"">
-					<p>Esta seguro que desea eliminar el usuario con cédula:</p>
+					<p>Esta seguro que desea eliminar el Cliente con cédula:</p>
 					<div class="form-group col-sm-4">
 						<label class="sr-only" for="inputCedulaUsuario"> Cédula
-							del Usuario: </label> <input type="text"
+							del Cliente: </label> <input type="text"
 							class="form-control form-control-sm mr-1"
 							id="inputCedulaUsuarioEliminar" placeholder="Cédula del Usuario"
 							name="cedula" readonly>
