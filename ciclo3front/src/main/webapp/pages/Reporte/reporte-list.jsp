@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="utf-8"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+<meta charset="ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 </link>
-<link rel="stylesheet" href="styles/styles.css">
-<meta charset="utf-8">
-<title>Tienda Generica</title>
+<link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -44,7 +45,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/VentaServlet/venta"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
+					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">
@@ -61,7 +62,21 @@
 		</div>
 	</nav>
 
-
+	<div class="jumbotron">
+		<div class="container">
+			<div class="card text-center">
+				<div class="card-header">Reportes de la Tienda Generica</div>
+				<div class="card-body">
+					<h5 class="card-title">Ventas</h5>
+					<a href="<%=request.getContextPath()%>/VentaServlet/lis" class="btn btn-primary">Lista Ventas</a>
+					<h5 class="card-title">Usuarios</h5>
+					<a href="<%=request.getContextPath()%>/UsuarioServlet/list" class="btn btn-warning">Lista Usuarios</a>
+					<h5 class="card-title">Clientes</h5>
+					<a href="<%=request.getContextPath()%>/ClienteServlet/list" class="btn btn-secondary">Lista Clientes</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -71,9 +86,9 @@
 						Proyecto Ciclo 3 Grupo 8<br> <i class="fa fa-user-plus fa-lg"></i>:
 						Juan David Lozano Moreno <br> <i
 							class="fa fa-user-times fa-lg"></i>: Brayan Alexis Villamizar
-						MontaÃ±ez:<br> <i class="fa fa-user-times fa-lg"></i>: Brandon
+						Montañez:<br> <i class="fa fa-user-times fa-lg"></i>: Brandon
 						sneyder Urbano Salamanca<br> <i
-							class="fa fa-user-times fa-lg"></i>: William SuÃ¡rez Escobar<br>
+							class="fa fa-user-times fa-lg"></i>: William Suárez Escobar<br>
 						<i class="fa fa-envelope fa-lg"></i>: <a
 							href="mailto:confusion@food.net">jd.lozanom@uniandes.edu.co</a>
 					</address>
@@ -97,7 +112,6 @@
 			</div>
 		</div>
 	</footer>
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

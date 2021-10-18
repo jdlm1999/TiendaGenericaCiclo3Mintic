@@ -1,25 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="utf-8"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ page import='co.edu.unbosque.ciclo3.Usuario.Usuario'%>
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+<meta charset="ISO-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 </link>
-<link rel="stylesheet" href="styles/styles.css">
-<meta charset="utf-8">
-<title>Tienda Generica</title>
+<link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><img src="img/logo.png"
-				height="30" width="41"></a>
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"><img
+				src="img/logo.png" height="30" width="41"></a>
 
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#Navbar"
@@ -38,13 +41,13 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/ProveedorServlet/list"><i
 							class='fas fa-people-carry'></i> Proveedores</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/ProductoServlet/detail"><i
+					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-store-alt'></i> Productos</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/VentaServlet/venta"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">
@@ -62,6 +65,51 @@
 	</nav>
 
 
+	<div class="jumbotron">
+		<div class="container">
+			<form action="list" method="post" id="ventalist">
+				<div class="form-group row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-success" value="Buscar"
+							name="Buscar">Listar ventas</button>
+					</div>
+				</div>
+
+			</form>
+
+			<div role="alert" id="alert">
+				<h4 class="alert-heading" id="msg"></h4>
+			</div>
+			<div class="row row-content">
+				<div class="col-12 col-md-9">
+					<h2>Usuarios Registrados</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th>Codigo</th>
+									<th>C.C Cliente</th>
+									<th>C.C Usuario</th>
+									<th>IVA Venta</th>
+									<th>Valor Venta</th>
+									<th>Total Venta</th>
+								</tr>
+							</thead>
+							<tbody id="table-venta"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-md-4">
+					<label for="totalventas" class="col-md-5 col-form-label">Total de las Ventas:</label> 
+					<input type="text" class="form-control col-md-7" id="totalventas"
+						name="totalventas" placeholder="totalventas" value="" readonly>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -71,9 +119,9 @@
 						Proyecto Ciclo 3 Grupo 8<br> <i class="fa fa-user-plus fa-lg"></i>:
 						Juan David Lozano Moreno <br> <i
 							class="fa fa-user-times fa-lg"></i>: Brayan Alexis Villamizar
-						MontaÃ±ez:<br> <i class="fa fa-user-times fa-lg"></i>: Brandon
+						Montañez:<br> <i class="fa fa-user-times fa-lg"></i>: Brandon
 						sneyder Urbano Salamanca<br> <i
-							class="fa fa-user-times fa-lg"></i>: William SuÃ¡rez Escobar<br>
+							class="fa fa-user-times fa-lg"></i>: William Suárez Escobar<br>
 						<i class="fa fa-envelope fa-lg"></i>: <a
 							href="mailto:confusion@food.net">jd.lozanom@uniandes.edu.co</a>
 					</address>
@@ -95,12 +143,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="row justify-content-center">
+				<div class="col-auto">
+					<p>© Copyright 2021 Grupo 8 - Ciclo 3. Mision TIC</p>
+				</div>
+			</div>
 		</div>
 	</footer>
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous"></script>
+	<script src="../js/jquery-3.6.0.min.js"></script>
+	<script src="../js/venta-list.js"></script>
 </body>
 </html>

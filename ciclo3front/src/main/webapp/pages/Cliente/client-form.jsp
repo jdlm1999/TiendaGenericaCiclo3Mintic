@@ -40,7 +40,7 @@
 							class='fas fa-store-alt'></i> Productos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/VentaServlet/venta"><i
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">

@@ -12,6 +12,7 @@ $(document).ready(function() {
 	$("#alertP1").hide();
 	$("#alertP2").hide();
 	$("#alertP3").hide();
+	$("#alertVenta").hide();
 	console.log('entra');
 
 	$("#buscarCliente").on('click', function(event) {
@@ -178,42 +179,48 @@ $(document).ready(function() {
 		}, 2000);
 	});
 
-	function total (){
-	let val = document.getElementById('valorVenta');
-	let val1 = document.getElementById('totalVenta');
-	let val3 = document.getElementById('ivaVenta');
-	val3.value = Math.round(iva1 + iva2 + iva3);
-	val.value = total1 + total2 + total3;
-	val1.value = Math.round((total1 + total2 + total3) + (iva1 + iva2 + iva3));
+	function total() {
+		let val = document.getElementById('valorVenta');
+		let val1 = document.getElementById('totalVenta');
+		let val3 = document.getElementById('ivaVenta');
+		val3.value = Math.round(iva1 + iva2 + iva3);
+		val.value = total1 + total2 + total3;
+		val1.value = Math.round((total1 + total2 + total3) + (iva1 + iva2 + iva3));
 	}
 
-	$("#consultar").on('click', function(event) {
+	$("#postVenta").on('submit', function(event) {
 		event.preventDefault();
-		let ced = document.getElementById('inputClienteEncontrado').value;
-		let cod1 = document.getElementById('nomCod1').value;
-		let cod2 = document.getElementById('nomCod2').value;
-		let cod3 = document.getElementById('nomCod3').value;
-		let can1 = document.getElementById('can1').value;
-		let can2 = document.getElementById('can2').value;
-		let can3 = document.getElementById('can3').value;
-		let val1 = document.getElementById('val1');
-		let val2 = document.getElementById('val2');
-		let val3 = document.getElementById('val3');
+		var f = $('#postVenta').serialize();
 
-		val1.value = 10;
-		val2.value = 20;
-		val3.value = 30;
+		console.log("Venta")
 
-		console.log(ced);
-		console.log(cod1);
-		console.log(cod2);
-		console.log(cod3);
-		console.log(can1);
-		console.log(can2);
-		console.log(can3);
-		console.log(val1);
-		console.log(val2);
-		console.log(val3);
-		// console.log(parseInt(cod1) + parseInt(cod2) + parseInt(cod3));
+		$.ajax({
+			url: "createVenta",
+			data: f,
+			type: 'POST',
+			success: function(data) {
+				console.log(data);
+				if (data.trim() === 'Existe ID') {
+					$("#alertVenta").show();
+					$("#msgVenta").html("No se ha creado la venta");
+					$("#alertVenta").addClass('alert alert-danger align-items-center');
+				}
+				else if (data.trim() === 'Existe Credenciales') {
+					$("#alertVenta").show();
+					$("#msgVenta").html("Ya existe una venta con el cliente");
+					$("#alertVenta").addClass('alert alert-danger align-items-center');
+				}
+				else {
+
+					$("#alertVenta").show();
+					$("#msgVenta").html("Se ha creado la venta exitosamente!!!");
+					$("#alertVenta").addClass('alert alert-success align-items-center');
+				}
+				setTimeout(() => {
+					$("#alertVenta").hide('fade');
+					$("#alertVenta").removeClass();
+				}, 2000);
+			}
+		});
 	});
 });

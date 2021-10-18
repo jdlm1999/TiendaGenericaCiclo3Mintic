@@ -31,9 +31,6 @@ public class ClienteAPI implements APIInterface<Cliente> {
 	@Autowired
 	private ClienteController clienteController;
 
-	@Autowired
-	private JWTUtil jwtUtil;
-
 	@Override
 	@PostMapping("/crear")
 	public boolean guardar(@RequestHeader(value = "Authorization", required = false) String token,

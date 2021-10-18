@@ -46,7 +46,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/VentaServlet/venta"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">
@@ -89,6 +89,7 @@
 			<section class="cards-product" id="cards-products"></section>
 		</div>
 	</div>
+	
 	<footer class="footer">
 		<div class="container">
 			<div class="row">

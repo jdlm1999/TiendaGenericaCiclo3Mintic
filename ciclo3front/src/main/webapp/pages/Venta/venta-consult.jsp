@@ -44,7 +44,7 @@
 							class='fas fa-store-alt'></i> Productos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"><i
 							class='fas fa-dollar-sign'></i> Ventas</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><i
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/ReporteServlet/reportes"><i
 							class='fas fa-clipboard-list'></i> Reportes</a></li>
 				</ul>
 				<form class="d-flex">
@@ -387,7 +387,7 @@
 								<div class="form-group row">
 									<div class="col-md-10">
 										<button id="crearVenta" type="submit" class="btn btn-primary"
-											value="crearVenta">Send Feedback</button>
+											value="crearVenta" onclick="return confirm('Estas seguro que deseas crear la venta?')">Send Feedback</button>
 									</div>
 								</div>
 

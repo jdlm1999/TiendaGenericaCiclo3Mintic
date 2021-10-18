@@ -15,9 +15,9 @@ $(document).ready(function() {
 				console.log(data);
 				if (data.error === 'No se encuentra') {
 					$("#alert").show();
-					$("#msg").html("No hemos encontrado el usuario.");
+					$("#msg").html("No se han encontrado productos.");
 					$("#alert").addClass('alert alert-danger align-items-center');
-					var tr = document.getElementById('bodyTable');
+					var tr = document.getElementById('cards-products');
 					tr.innerHTML = '';
 				} else {
 					var tr = document.getElementById('cards-products');
@@ -35,7 +35,7 @@ $(document).ready(function() {
 </div>`
 					}
 					$("#alert").show();
-					$("#msg").html("Usuario Encontrado");
+					$("#msg").html("Productos Cargados");
 					$("#alert").addClass('alert alert-success align-items-center');
 				}
 			}

@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import co.edu.unbosque.ciclo3.Cliente.Cliente;
 import co.edu.unbosque.ciclo3.Cliente.ClienteJSON;
 import co.edu.unbosque.ciclo3.Producto.ProductJSON;
+import co.edu.unbosque.ciclo3.Usuario.Usuario;
+import co.edu.unbosque.ciclo3.Usuario.UsuarioJSON;
 
 /**
  * Servlet implementation class VentaServlet
@@ -60,12 +64,15 @@ public class VentaServlet extends HttpServlet {
 			case "/searchProduct3":
 				searchProduct3(request, response);
 				break;
-//			case "/busqueda":
-//				getOne(request, response);
-//				break;
-//			default:
-//				listUser(request, response);
-//				break;
+			case "/createVenta":
+				postVenta(request, response);
+				break;
+			case "/list":
+				listVentas(request, response);
+				break;
+			default:
+				showList(request, response);
+				break;
 			}
 		} catch (Exception e) {
 			System.err.println("Error: path");
@@ -91,6 +98,37 @@ public class VentaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Venta/venta-consult.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	private void showList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/Venta/venta-list.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void postVenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Venta nuevo = new Venta();
+		nuevo.setCedula_cliente(Long.parseLong(request.getParameter("cedulaClienteVenta")));
+		nuevo.setIva_venta(Double.parseDouble(request.getParameter("ivaVenta")));
+		nuevo.setValor_venta(Double.parseDouble(request.getParameter("valorVenta")));
+		nuevo.setTotal_venta(Double.parseDouble(request.getParameter("totalVenta")));
+		
+		int rta = 0;
+		try {
+			PrintWriter writter = response.getWriter();
+			rta = VentaJSON.postJSON(nuevo);
+			if (rta == 200)
+				writter.println("Creado");
+			else if (rta == 302)
+				writter.println("Existe ID");
+			else if (rta == 406)
+				writter.println("Existe Credenciales");
+			else if (rta == 412)
+				writter.println("Vacias Credenciales");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void buscarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -177,6 +215,30 @@ public class VentaServlet extends HttpServlet {
 			System.out.println(product);
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+	}
+	
+	private void listVentas(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		try {
+			PrintWriter writter = response.getWriter();
+			JSONArray lista = VentaJSON.getJSON();
+			System.out.println(lista);
+			if(lista == null) {
+				System.err.println("Nuloooo");
+				JSONParser jsonParser = new JSONParser();
+				String err = "{\"error\": \"No se encuentra\"}";
+				JSONObject error = (JSONObject) jsonParser.parse(err);
+				writter.println(error);
+			}
+			else
+				writter.println(lista);
+		} catch (IOException exception) {
+			request.setAttribute("error", exception.getLocalizedMessage() + " No tienes autorizacion!!!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+			dispatcher.forward(request, response);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 

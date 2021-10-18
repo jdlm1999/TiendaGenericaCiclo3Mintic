@@ -1,27 +1,11 @@
-package co.edu.unbosque.ciclo3back.model;
+package co.edu.unbosque.ciclo3.Venta;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "Venta")
 public class Venta {
-
-	@Id
-	@GeneratedValue
 	private Long codigo_venta;
-	@Column(nullable = false, length = 20, unique = true)
 	private Long cedula_cliente;
-	@Column(length = 20)
 	private Long cedula_usuario;
-	@Column(nullable = false)
 	private double iva_venta;
-	@Column(nullable = false)
 	private double total_venta;
-	@Column(nullable = false)
 	private double valor_venta;
 
 	public Long getCodigo_venta() {
@@ -71,4 +55,5 @@ public class Venta {
 	public void setValor_venta(double valor_venta) {
 		this.valor_venta = valor_venta;
 	}
+
 }
